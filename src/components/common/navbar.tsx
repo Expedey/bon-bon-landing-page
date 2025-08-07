@@ -1,0 +1,89 @@
+"use client";
+import React, { useState } from "react";
+import { HoveredLink, Menu, MenuItem, ProductItem } from "../ui/navbar-menu";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "../ui/button";
+import { usePathname } from "next/navigation";
+
+function Navbar({ className }: { className?: string }) {
+  const pathname = usePathname();
+  const links = [
+    {
+      label: "Home",
+      href: "/",
+    },
+    {
+      label: "Works",
+      href: "/works",
+    },
+    {
+      label: "Goodbye",
+      href: "/goodbye",
+    },
+    {
+      label: "Hello",
+      href: "/hello",
+    },
+    {
+      label: "Program",
+      href: "/program",
+    },
+    {
+      label: "Leaderboard",
+      href: "/leaderboard",
+    },
+    {
+      label: "About",
+      href: "/about",
+    },
+  ];
+  return (
+    <div
+      className={cn(
+        "fixed inset-x-0 bottom-5 z-50 mx-auto max-w-full md:bottom-10 w-fit",
+        className
+      )}
+    >
+      <Menu
+        setActive={() => {}}
+        className="flex h-auto justify-start overflow-x-auto md:overflow-x-hidden items-center mx-auto w-[calc(100vw-32px)] md:w-full px-[15px] py-[10px]"
+      >
+        <Image
+          src="/images/navbar-icon.svg"
+          alt="logo"
+          width={38}
+          height={38}
+          className="hidden lg:block"
+        />
+        <div className="!mx-10 hidden lg:block w-[1px] bg-[#48AF5E] h-10" />
+        <div className="!ml-0 flex items-center gap-[20px] lg:gap-[50px]">
+          {links.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className={cn(
+                "text-white text-lg text-center tracking-[0] leading-[normal]",
+                pathname === link.href && "underline underline-offset-4"
+              )}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+        <Button className="!ml-10 hidden lg:block">Join Now</Button>
+        {/* <MenuItem setActive={setActive} active={active} item="Services">
+          <div className="flex flex-col space-y-4 text-sm">
+            <HoveredLink href="/web-dev">Web Development</HoveredLink>
+            <HoveredLink href="/interface-design">Interface Design</HoveredLink>
+            <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
+            <HoveredLink href="/branding">Branding</HoveredLink>
+          </div>
+        </MenuItem> */}
+      </Menu>
+    </div>
+  );
+}
+
+export default Navbar;
