@@ -1,8 +1,13 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState, useRef } from "react";
 import { Card, CardContent } from "../../../../components/ui/card";
 import Image from "next/image";
+import { SemiCircleIcon } from "@/components/icons";
 
 export const FeaturesSection = (): JSX.Element => {
+  const [currentElement, setCurrentElement] = useState(5);
+  const containerRef = useRef<HTMLDivElement>(null);
   // Data for the "Say bye bye to" section
   const painPoints = [
     { id: 1, regular: "Outdated ", bold: "look & feel" },
@@ -44,14 +49,71 @@ export const FeaturesSection = (): JSX.Element => {
     },
   ];
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentElement((prev) => {
+        if (prev === painPoints.length) {
+          return 1;
+        } else {
+          return prev + 1;
+        }
+      });
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [painPoints.length]);
+
+  // Smooth movement animation
+  useEffect(() => {
+    if (containerRef.current) {
+      const container = containerRef.current;
+      const currentElementIndex = currentElement - 1;
+      const elementHeight = 80; // Approximate height of each element + gap
+      const scrollPosition = currentElementIndex * elementHeight;
+
+      container.style.transform = `translateY(-${scrollPosition}px)`;
+    }
+  }, [currentElement]);
+
+  const generateBlur = (id: number) => {
+    // Calculate the distance from the current element
+    const distance = Math.abs(id - currentElement);
+
+    // If it's the current element, no blur
+    if (distance === 0) {
+      return "blur-[0px]";
+    }
+
+    // Calculate blur amount: 2px per step away from current element
+    const blurAmount = distance * 2;
+
+    return `blur-[${blurAmount}px]`;
+  };
+
+  console.log(generateBlur(1), "__blur");
+
   return (
-    <section className="overflow-hidden relative w-full min-h-screen">
+    <section className="overflow-hidden relative w-full min-h-screen flex items-stretch">
       {/* First section - "Say bye bye to" */}
-      <div className="relative w-full h-full bg-[linear-gradient(180deg,rgba(15,12,41,1)_0%,rgba(21,16,67,1)_100%)]">
+      <div className="relative w-full h-auto bg-[linear-gradient(180deg,rgba(15,12,41,1)_0%,rgba(21,16,67,1)_100%)]">
+        {/* Top Shapes */}
+        <div className="hidden absolute top-0 -translate-y-1/2 left-0 lg:block">
+          <SemiCircleIcon fillColor="#EE86E7" />
+        </div>
+        <div className="absolute top-0 translate-y-[-20px] translate-x-[-35px] left-0 lg:hidden">
+          <SemiCircleIcon fillColor="#74DB8A" className="w-[130px] h-[130px]" />
+        </div>
+
+        {/* Bottom Shapes */}
+        <div className="hidden absolute bottom-0 translate-y-1/2 right-0 rotate-180 lg:block">
+          <SemiCircleIcon fillColor="#74DB8A" />
+        </div>
+        <div className="absolute bottom-5 right-0 rotate-180 translate-x-[35px] lg:hidden">
+          <SemiCircleIcon className="w-[130px] h-[130px]" />
+        </div>
         <div className="relative px-6 mx-auto h-full">
           {/* Decorative elements */}
 
-          <div className="flex items-center justify-center gap-[154px] relative">
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20 xl:gap-32 2xl:gap-[154px] relative h-full">
             {/* Left side - "Say bye bye to" */}
             <div className="flex gap-5 items-center">
               <Image src="/images/wave.svg" alt="Wave" width={90} height={90} />
@@ -61,37 +123,39 @@ export const FeaturesSection = (): JSX.Element => {
             </div>
 
             {/* Right side - Scrolling pain points */}
-            <div className="relative w-[511px] h-[918px] overflow-hidden">
-              {/* Top gradient overlay */}
-              <div className="absolute w-full h-[394px] top-0 left-0 z-10 backdrop-blur-sm backdrop-brightness-[100%] bg-[linear-gradient(180deg,rgba(15,12,42,1)_0%,rgba(16,13,47,0.5)_52%,rgba(18,14,53,0)_100%)]" />
-
+            <div className="relative overflow-hidden h-[400px]">
               {/* Pain points list */}
-              <div className="relative w-full h-full">
-                {painPoints.map((point, index) => (
-                  <div
-                    key={point.id}
-                    className={`inline-flex items-center justify-center gap-2.5 px-[30px] py-2.5 absolute left-0 rounded-[50px] border border-solid border-[#ffffff1a] bg-[linear-gradient(0deg,rgba(255,255,255,0.02)_0%,rgba(255,255,255,0.02)_100%)]`}
-                    style={{ top: `${106 * index}px` }}
-                  >
-                    <div className="relative w-fit mt-[-1.00px] [font-family:'OwnersTRIAL-Regular',Helvetica] font-normal text-x-4 text-4xl tracking-[1.44px] leading-9">
-                      <span className="tracking-[0.52px] leading-[0.1px]">
-                        {point.regular}
-                      </span>
-                      <span className="[font-family:'OwnersTRIAL-Medium',Helvetica] font-medium tracking-[0.52px]">
-                        {point.bold}
-                      </span>
+              <div
+                ref={containerRef}
+                className="relative flex flex-col items-center lg:items-start w-full gap-8 transition-transform duration-1000 ease-out"
+                style={{
+                  paddingTop: "160px",
+                  paddingBottom: "160px",
+                }}
+              >
+                {painPoints.map((point, index) => {
+                  const distance = Math.abs(point.id - currentElement);
+                  const opacity = Math.max(1 - distance * 0.1, 0.3);
+
+                  return (
+                    <div
+                      key={index}
+                      className={`relative w-fit text-white bg-[#FFFFFF05] 2xl:text-4xl border border-[#FFFFFF1A] rounded-[50px] py-[10px] px-[30px] transition-all duration-300 ease-out backdrop-blur-sm ${generateBlur(
+                        point.id
+                      )}`}
+                      style={{
+                        opacity: opacity,
+                      }}
+                    >
+                      <span className="">{point.regular}</span>
+                      <span className="">{point.bold}</span>
                       {point.regular2 && (
-                        <span className="tracking-[0.52px] leading-[0.1px]">
-                          {point.regular2}
-                        </span>
+                        <span className="">{point.regular2}</span>
                       )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
-
-              {/* Bottom gradient overlay */}
-              <div className="absolute w-[511px] h-[410px] bottom-0 left-0 rotate-180 backdrop-blur-sm backdrop-brightness-[100%] z-10 bg-[linear-gradient(180deg,rgba(21,16,67,1)_0%,rgba(21,16,67,0)_100%)]" />
             </div>
           </div>
 
@@ -100,7 +164,7 @@ export const FeaturesSection = (): JSX.Element => {
       </div>
 
       {/* Second section - "Say hello to" */}
-      <div className="absolute w-full h-[1000px] top-[1000px] left-0 bg-x-1">
+      <div className="hidden absolute w-full h-[1000px] top-[1000px] left-0 bg-x-1">
         <div className="relative h-[1000px] max-w-[1835px] mx-auto px-6">
           {/* Section title */}
           <div className="flex gap-[25px] items-center absolute top-20 left-60">

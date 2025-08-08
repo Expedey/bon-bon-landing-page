@@ -18,7 +18,7 @@ export const HomePage = (): JSX.Element => {
         <HeaderSection />
         <HowItWorksSection />
         <FeaturesSection />
-        {/* <CallToActionSection /> */}
+        <CallToActionSection />
         <div className="flex">
           <AppShowcaseSection />
           <TestimonialsSection />

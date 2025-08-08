@@ -49,3 +49,56 @@ export const CircleIcon = ({
     ></path>
   </svg>
 );
+
+export const SendButtonIcon = ({
+  className = "",
+  fillColor = "#FF5C5C",
+  height = 27,
+  width = 27,
+  strokeColor,
+}: TSvgIconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill="none"
+    viewBox="0 0 27 27"
+    className={className}
+  >
+    <g clipPath="url(#clip0_5358_155)">
+      <path
+        fill="#FF5C5C"
+        d="M1.331 26.483a.76.76 0 0 1-.538-1.299l6.829-6.828a.76.76 0 1 1 1.076 1.075l-6.83 6.83a.76.76 0 0 1-.537.222"
+      ></path>
+      <path
+        fill="#EF3030"
+        d="M8.68 18.338.777 26.24l.017.018a.76.76 0 0 0 1.076 0l6.829-6.829a.76.76 0 0 0 0-1.075zM6.772 26.48a.76.76 0 0 1-.538-1.298l4.616-4.615a.76.76 0 1 1 1.076 1.075L7.31 26.258a.76.76 0 0 1-.538.223"
+      ></path>
+      <path
+        fill="#FF5C5C"
+        d="M1.26 21.112a.76.76 0 0 1-.538-1.299l4.687-4.686a.76.76 0 1 1 1.076 1.076l-4.686 4.686a.76.76 0 0 1-.538.223"
+      ></path>
+      <path
+        fill="#FFD93B"
+        d="M26.277.74a.76.76 0 0 0-.739-.195L4.252 6.37a.76.76 0 0 0-.184 1.39l6.755 3.747 4.689 4.688 3.747 6.755a.76.76 0 0 0 1.39-.183l5.825-21.288a.76.76 0 0 0-.196-.739"
+      ></path>
+      <path
+        fill="#FDBF00"
+        d="M26.279.74 13.168 13.85l2.344 2.345 3.747 6.755a.76.76 0 0 0 1.39-.184L26.474 1.48A.76.76 0 0 0 26.28.74"
+      ></path>
+      <path
+        fill="#FDBF00"
+        d="M26.277.74 10.822 11.506l-1.277 5.026a.76.76 0 0 0 .94.94l5.025-1.277z"
+      ></path>
+      <path
+        fill="#FF9F00"
+        d="M9.738 17.278a.76.76 0 0 0 .747.194l5.025-1.277L26.276.74z"
+      ></path>
+    </g>
+    <defs>
+      <clipPath id="clip0_5358_155">
+        <path fill="#fff" d="M.5.5h26v26H.5z"></path>
+      </clipPath>
+    </defs>
+  </svg>
+);
