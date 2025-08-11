@@ -21,8 +21,8 @@ export const MockupDisplaySection = (): JSX.Element => {
 
   // Footer links data
   const footerLinks = [
-    { name: "Terms & Condition" },
-    { name: "Privacy Policy" },
+    { name: "Terms & Condition", href: "/terms-and-conditions" },
+    { name: "Privacy Policy", href: "/privacy-policy" },
   ];
 
   // Social media icons data
@@ -33,7 +33,7 @@ export const MockupDisplaySection = (): JSX.Element => {
   ];
 
   return (
-    <section className="w-full px-2 pb-2 lg:px-[30px] lg:pb-[330px] pt-20 ">
+    <section className="w-full px-2 pb-2 lg:px-[30px] lg:pb-[30px]">
       <div className="w-full p-6 lg:p-[30px] rounded-[40px] bg-[linear-gradient(180deg,rgba(106,74,253,1)_0%,rgba(48,21,169,1)_100%)] relative overflow-hidden">
         {/* Decoration svg */}
         <div className="absolute max-lg:top-1/2 max-lg:-translate-y-1/2 max-lg:right-[-25px] 2xl:top-[96px] right-0 rotate-180 2xl:translate-x-[85px]">
@@ -99,7 +99,7 @@ export const MockupDisplaySection = (): JSX.Element => {
           </div>
 
           {/* Responsive Social Media Icons */}
-          <div className="flex items-center gap-4 lg:hidden">
+          <div className="flex gap-4 items-center lg:hidden">
             {socialIcons.map((icon, index) => (
               <Link href={icon.link} key={`social-icon-${index}`}>
                 <Image
@@ -137,15 +137,16 @@ export const MockupDisplaySection = (): JSX.Element => {
           </p>
 
           {/* Footer Links */}
-          <div className="items-center gap-10 relative hidden lg:inline-flex ">
+          <div className="hidden relative gap-10 items-center lg:inline-flex">
             <div className="inline-flex items-center gap-5 xl:gap-[50px] relative flex-[0_0_auto]">
               {footerLinks.map((link, index) => (
-                <div
+                <Link
+                  href={link.href}
                   key={`footer-link-${index}`}
                   className="text-white xl:text-lg text-center tracking-[0] leading-[normal]"
                 >
                   {link.name}
-                </div>
+                </Link>
               ))}
             </div>
           </div>

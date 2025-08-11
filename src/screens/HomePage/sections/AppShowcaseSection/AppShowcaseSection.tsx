@@ -8,122 +8,208 @@ import {
   TableHeader,
   TableRow,
 } from "../../../../components/ui/table";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { SemiCircleIcon } from "@/components/icons";
+
+type TCardWithButton = {
+  title: string;
+  description?: string;
+  buttonText: string;
+  buttonLink: string;
+};
+
+const CardWithButton = ({
+  title,
+  description,
+  buttonText,
+  buttonLink,
+}: TCardWithButton) => {
+  return (
+    <div className="flex flex-col gap-10 text-white">
+      <div className="bg-[#1E1E1E] p-[30px] xl:p-[50px] border border-[#FFFFFF1A] rounded-[20px] xl:rounded-[50px] shadow-[0px_0px_100px_0px_#76D9891A] lg:shadow-none">
+        <h3 className="text-2xl font-medium xl:text-4xl">{title}</h3>
+        {description && (
+          <p className="text-white text-base xl:text-[22px] mt-5 break-words whitespace-pre-line">
+            {description}
+          </p>
+        )}
+      </div>
+      <Link href={buttonLink} className="ml-auto w-fit">
+        <Button>{buttonText}</Button>
+      </Link>
+    </div>
+  );
+};
 
 export const AppShowcaseSection = (): JSX.Element => {
   // Data for the table rows
   const tableData = [
     {
       id: "01",
-      avatar: "/ellipse-4.png",
+      avatar: "/images/avatar-1.png",
       username: "Lorem Ipsum",
       inviteCount: "100K+",
-      tierBadge: "/gold-tier-achievement-badges-3d-illustration-png-1.png",
+      tierBadge: "/images/gold-badge.svg",
     },
     {
       id: "02",
-      avatar: "/ellipse-5.png",
+      avatar: "/images/avatar-2.png",
       username: "Dolor Site",
       inviteCount: "99K+",
-      tierBadge: "/gold-tier-achievement-badges-3d-illustration-png-5.png",
+      tierBadge: "/images/gold-badge.svg",
     },
     {
       id: "03",
-      avatar: "/ellipse-6.png",
+      avatar: "/images/avatar-3.png",
       username: "Obama",
       inviteCount: "98K+",
-      tierBadge: "/gold-tier-achievement-badges-3d-illustration-png-2.png",
+      tierBadge: "/images/silver-badge.svg",
     },
     {
       id: "04",
-      avatar: "/ellipse-7.png",
+      avatar: "/images/avatar-4.png",
       username: "Tony",
       inviteCount: "97.8K+",
-      tierBadge: "/gold-tier-achievement-badges-3d-illustration-png-6.png",
+      tierBadge: "/images/silver-badge.svg",
     },
     {
       id: "05",
-      avatar: "/ellipse-8.png",
+      avatar: "/images/avatar-5.png",
       username: "Tenos",
       inviteCount: "97.5K+",
-      tierBadge: "/gold-tier-achievement-badges-3d-illustration-png-3.png",
+      tierBadge: "/images/iron-badge.svg",
+    },
+  ];
+
+  const cards = [
+    {
+      title: "Specific thresholds unlock access to perks",
+      description: `
+        Example:\n
+        3 invites = early access \n
+        10 invites = invite only-experiences \n
+        Top 10% = special recognition or premium features
+      `,
+      buttonText: "Each referral",
+      buttonLink: "/",
+    },
+    {
+      title: "Earn referral gives the user points or XP",
+      buttonText: "Join the waitlist",
+      buttonLink: "/",
+    },
+    {
+      title: "Earn referral gives the user points or XP",
+      buttonText: "Join the waitlist",
+      buttonLink: "/",
+    },
+    {
+      title: "Earn referral gives the user points or XP",
+      buttonText: "Join the waitlist",
+      buttonLink: "/",
     },
   ];
 
   return (
-    <div className="relative w-full max-w-[764px] mx-auto">
-      <Card className="bg-[#1c1e20] rounded-[32.93px] overflow-hidden shadow-[8.23px_0px_0.82px_#0000000a,0px_1.65px_4.94px_#0000001a,0px_13.17px_19.76px_#0000001a]">
+    <div className="relative w-full mx-auto lg:px-[30px]">
+      <Card className="bg-[#FFFFFF05] rounded-[50px] overflow-hidden py-[86px] border border-[#FFFFFF1A]">
+        <div className="text-center max-w-[1320px] w-full mx-auto mb-10 px-4">
+          <h2>Top Sharers Get First Access</h2>
+          <p className="mt-10">
+            “Each invite boosts your rank. The higher you climb, the better your
+            rewards.
+          </p>
+        </div>
         {/* Browser-like header */}
-        <div className="relative h-[69px] p-5">
-          {/* Window control buttons */}
-          <div className="inline-flex h-[19px] items-center gap-[11.1px] absolute top-[25px] left-[37px]">
-            <div className="relative w-[13.9px] h-[13.9px] bg-[#f45952] rounded-[6.95px]" />
-            <div className="relative w-[13.9px] h-[13.9px] bg-[#dfb94e] rounded-[6.95px]" />
-            <div className="relative w-[13.9px] h-[13.9px] bg-[#5ab748] rounded-[6.95px]" />
-          </div>
+        <div className="max-w-[1440px] w-full mx-auto flex flex-col gap-10 lg:flex-row justify-between lg:px-[100px]">
+          <div className="relative flex-[3] px-4 lg:px-0">
+            <div className="relative bg-[#1C1E20] rounded-tl-[32px] rounded-tr-[32px]">
+              {/* Window control buttons */}
+              <div className="flex gap-12 items-center px-9 py-5">
+                <div className="inline-flex h-[19px] items-center gap-[11px]">
+                  <div className="relative w-[14px] h-[14px] bg-[#f45952] rounded-[6px]" />
+                  <div className="relative w-[14px] h-[14px] bg-[#dfb94e] rounded-[6px]" />
+                  <div className="relative w-[14px] h-[14px] bg-[#5ab748] rounded-[6px]" />
+                </div>
 
-          {/* Address bar */}
-          <div className="absolute w-[442px] h-[30px] top-[21px] left-[148px] bg-[#26282b] rounded-[6.59px]">
-            <div className="absolute top-1.5 left-2.5 [font-family:'DM_Sans',Helvetica] font-normal text-white text-xs tracking-[0] leading-[normal]">
-              BONBON
+                {/* Address bar */}
+                <div className=" max-w-[442px] w-full bg-[#26292C] rounded-[6px] py-[7px] px-[10px]">
+                  <p className="text-white text-xs tracking-[0] leading-[normal]">
+                    BONBON
+                  </p>
+                </div>
+              </div>
             </div>
+            {/* Table content */}
+            <CardContent className="p-0">
+              <div className="bg-[#26292c] rounded-bl-[32px] rounded-br-[32px] p-2.5 lg:p-5 relative">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="bg-[#ffffff05] rounded-[20px] hover:bg-transparent h-[65px]">
+                      <TableHead className="text-[10px] lg:text-lg text-center text-white rounded-tl-[20px] rounded-bl-[20px]">
+                        No
+                      </TableHead>
+                      <TableHead className="text-[10px] lg:text-lg text-center text-white">
+                        Avatar
+                      </TableHead>
+                      <TableHead className="text-[10px] lg:text-lg text-white">
+                        Username
+                      </TableHead>
+                      <TableHead className="text-[10px] lg:text-lg text-white">
+                        Invite count
+                      </TableHead>
+                      <TableHead className="text-[10px] lg:text-lg text-center text-white rounded-tr-[20px] rounded-br-[20px]">
+                        Tier badge
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {tableData.map((row) => (
+                      <TableRow
+                        key={row.id}
+                        className="hover:bg-transparent min-h-[34px] lg:min-h-[65px]"
+                      >
+                        <TableCell className="text-[9px] lg:text-base text-center text-white">
+                          {row.id}
+                        </TableCell>
+                        <TableCell className="text-center">
+                          <img
+                            className="object-cover mx-auto w-[30px] lg:w-14 h-[30px] lg:h-14 rounded-full"
+                            alt="User avatar"
+                            src={row.avatar}
+                          />
+                        </TableCell>
+                        <TableCell className="text-[9px] lg:text-base text-white">
+                          {row.username}
+                        </TableCell>
+                        <TableCell className="text-[9px] lg:text-base text-white">
+                          {row.inviteCount}
+                        </TableCell>
+                        <TableCell className="text-center">
+                          <img
+                            className="w-8 lg:w-[60px] h-8 lg:h-[60px] mx-auto"
+                            alt="Gold tier"
+                            src={row.tierBadge}
+                          />
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+                {/* Left SVG */}
+                <div className="hidden absolute left-0 top-1/2 rotate-180 -translate-x-full lg:block">
+                  <SemiCircleIcon fillColor="#EB612B" />
+                </div>
+              </div>
+            </CardContent>
+          </div>
+          <div className="flex flex-[2] flex-col gap-10 px-4 lg:px-0 max-w-[588px] w-full mx-auto lg:mx-0 lg:mt-20">
+            {cards.map((card, index) => (
+              <CardWithButton key={index} {...card} />
+            ))}
           </div>
         </div>
-
-        {/* Table content */}
-        <CardContent className="p-0">
-          <div className="bg-[#26292c] rounded-[0px_0px_32.93px_32.93px] p-5">
-            <Table>
-              <TableHeader>
-                <TableRow className="bg-[#ffffff05] rounded-[20px]">
-                  <TableHead className="[font-family:'OwnersTRIAL-Regular',Helvetica] font-normal text-white text-lg tracking-[0.72px]">
-                    No
-                  </TableHead>
-                  <TableHead className="[font-family:'OwnersTRIAL-Regular',Helvetica] font-normal text-white text-lg tracking-[0.72px]">
-                    Avatar
-                  </TableHead>
-                  <TableHead className="[font-family:'OwnersTRIAL-Regular',Helvetica] font-normal text-white text-lg tracking-[0.72px]">
-                    Username
-                  </TableHead>
-                  <TableHead className="[font-family:'OwnersTRIAL-Regular',Helvetica] font-normal text-white text-lg tracking-[0.72px]">
-                    Invite count
-                  </TableHead>
-                  <TableHead className="[font-family:'OwnersTRIAL-Regular',Helvetica] font-normal text-white text-lg tracking-[0.72px]">
-                    Tier badge
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {tableData.map((row) => (
-                  <TableRow key={row.id} className="h-[84px]">
-                    <TableCell className="[font-family:'OwnersTRIAL-Regular',Helvetica] font-normal text-white text-base tracking-[0.64px]">
-                      {row.id}
-                    </TableCell>
-                    <TableCell>
-                      <img
-                        className="w-14 h-14 object-cover rounded-full"
-                        alt="User avatar"
-                        src={row.avatar}
-                      />
-                    </TableCell>
-                    <TableCell className="[font-family:'OwnersTRIAL-Regular',Helvetica] font-normal text-white text-base tracking-[0.64px]">
-                      {row.username}
-                    </TableCell>
-                    <TableCell className="[font-family:'OwnersTRIAL-Regular',Helvetica] font-normal text-white text-base tracking-[0.64px]">
-                      {row.inviteCount}
-                    </TableCell>
-                    <TableCell>
-                      <img
-                        className="w-[60px] h-[60px]"
-                        alt="Gold tier"
-                        src={row.tierBadge}
-                      />
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </CardContent>
       </Card>
     </div>
   );

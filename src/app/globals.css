@@ -116,11 +116,16 @@
 }
 
 h2 {
-  @apply text-white font-medium text-4xl xl:text-5xl 2xl:text-6xl;
+  @apply text-4xl font-medium text-white xl:text-5xl 2xl:text-6xl;
 }
 
 p {
   @apply text-[#B1B1B1] text-lg leading-normal xl:text-2xl 2xl:text-[26px] 2xl:leading-10 tracking-[4%];
+}
+
+.text-shadow {
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #fff;
 }
 
 @import url("https://fonts.googleapis.com/css?family=DM+Sans:400");

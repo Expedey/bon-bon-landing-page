@@ -92,11 +92,11 @@ export const FeaturesSection = (): JSX.Element => {
   console.log(generateBlur(1), "__blur");
 
   return (
-    <section className="overflow-hidden relative w-full min-h-screen flex items-stretch">
+    <section className="flex overflow-hidden relative flex-col items-stretch w-full min-h-screen">
       {/* First section - "Say bye bye to" */}
       <div className="relative w-full h-auto bg-[linear-gradient(180deg,rgba(15,12,41,1)_0%,rgba(21,16,67,1)_100%)]">
         {/* Top Shapes */}
-        <div className="hidden absolute top-0 -translate-y-1/2 left-0 lg:block">
+        <div className="hidden absolute top-0 left-0 -translate-y-1/2 lg:block">
           <SemiCircleIcon fillColor="#EE86E7" />
         </div>
         <div className="absolute top-0 translate-y-[-20px] translate-x-[-35px] left-0 lg:hidden">
@@ -104,13 +104,13 @@ export const FeaturesSection = (): JSX.Element => {
         </div>
 
         {/* Bottom Shapes */}
-        <div className="hidden absolute bottom-0 translate-y-1/2 right-0 rotate-180 lg:block">
+        <div className="hidden absolute right-0 bottom-0 rotate-180 translate-y-1/2 lg:block">
           <SemiCircleIcon fillColor="#74DB8A" />
         </div>
         <div className="absolute bottom-5 right-0 rotate-180 translate-x-[35px] lg:hidden">
           <SemiCircleIcon className="w-[130px] h-[130px]" />
         </div>
-        <div className="relative px-6 mx-auto h-full">
+        <div className="relative px-6 mx-auto h-full min-h-screen">
           {/* Decorative elements */}
 
           <div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20 xl:gap-32 2xl:gap-[154px] relative h-full">
@@ -127,7 +127,7 @@ export const FeaturesSection = (): JSX.Element => {
               {/* Pain points list */}
               <div
                 ref={containerRef}
-                className="relative flex flex-col items-center lg:items-start w-full gap-8 transition-transform duration-1000 ease-out"
+                className="flex relative flex-col gap-8 items-center w-full transition-transform duration-1000 ease-out lg:items-start"
                 style={{
                   paddingTop: "160px",
                   paddingBottom: "160px",
@@ -164,38 +164,37 @@ export const FeaturesSection = (): JSX.Element => {
       </div>
 
       {/* Second section - "Say hello to" */}
-      <div className="hidden absolute w-full h-[1000px] top-[1000px] left-0 bg-x-1">
-        <div className="relative h-[1000px] max-w-[1835px] mx-auto px-6">
+      <div className="relative min-h-screen w-full h-auto bg-[#6A4AFD] py-20">
+        <div className="relative max-w-[1440px] w-full mx-auto px-6">
           {/* Section title */}
-          <div className="flex gap-[25px] items-center absolute top-20 left-60">
-            <img
-              className="w-[90px] h-[90px]"
-              alt="Component"
-              src="/component-39.svg"
-            />
-            <h2 className="font-medium text-6xl text-white [font-family:'OwnersTRIAL-Medium',Helvetica]">
+          <div className="flex gap-5 items-center mb-10 xl:mb-[60px]">
+            <Image src="/images/wave.svg" alt="Wave" width={90} height={90} />
+            <h2 className="text-4xl font-medium leading-normal text-white xl:text-5xl 2xl:text-6xl">
               Say hello to
             </h2>
           </div>
 
           {/* Benefits cards grid */}
-          <div className="flex flex-wrap w-full max-w-[1440px] items-start gap-[30px] absolute top-[230px] left-60">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-[30px]">
             {benefits.map((benefit) => (
               <Card
                 key={benefit.id}
-                className="flex flex-col w-[705px] items-start gap-2.5 p-[50px] bg-[#ffffff05] rounded-[40px] border border-solid border-[#ffffff33] backdrop-blur-sm"
+                className="flex flex-col items-start gap-2.5 p-10 xl:p-[50px] bg-[#ffffff05] rounded-[40px] border border-solid border-[#ffffff33] backdrop-blur-sm"
               >
-                <CardContent className="flex flex-col gap-5 items-start p-0 w-full">
-                  <img
-                    className="relative h-[66px]"
-                    alt="Frame"
-                    src="/frame-13.svg"
-                  />
-                  <div className="flex flex-col gap-4 items-start w-full">
-                    <h3 className="self-stretch mt-[-1.00px] [font-family:'OwnersTRIAL-Medium',Helvetica] font-medium text-white text-[32px]">
+                <CardContent className="flex flex-col items-start p-0 w-full">
+                  <div className="relative xl:w-[66px] xl:h-[66px] w-[50px] h-[50px] rounded-full overflow-hidden">
+                    <Image
+                      className="object-cover relative"
+                      alt="Email"
+                      src="/images/email.svg"
+                      fill
+                    />
+                  </div>
+                  <div className="flex flex-col gap-4 items-start mt-4 w-full xl:mt-5">
+                    <h3 className="font-medium text-white text-xl xl:text-[32px] mb-2 xl:mb-4">
                       {benefit.title}
                     </h3>
-                    <p className="self-stretch [font-family:'OwnersTRIAL-Regular',Helvetica] font-normal text-white text-lg tracking-[0.72px]">
+                    <p className="font-normal text-white text-lg tracking-[0.72px]">
                       {benefit.description}
                     </p>
                   </div>

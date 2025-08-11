@@ -1,9 +1,18 @@
-import React from "react";
+"use client";
+import React, { useEffect, useRef } from "react";
 import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
 import { SemiCircleIcon } from "@/components/icons";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 export const CallToActionSection = (): JSX.Element => {
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   // Card data for mapping
   const cards = [
     {
@@ -11,42 +20,75 @@ export const CallToActionSection = (): JSX.Element => {
       description:
         "Once you join the waitlist, you'll get a unique referral link made just for you. It's your golden ticket to skip the line  and bring your friends with you.",
       buttonText: "Invite Now",
-      // translate: "translate-x-[160px]",
-      // rotation: "xl:rotate-[-15deg]",
       shadow: "xl:shadow-[0px_0px_100px_#6a4afd1a]",
       imageSrc: "/frame-42-4.svg",
       index: "z-[1]",
       icon: <SemiCircleIcon />,
+      initialRotation: -15,
     },
     {
       title: "Share it Anywhere\n& Everywhere",
       description:
         "Send your link via WhatsApp, Instagram, Messenger, or even text. Every friend who signs up through you boosts your rank on the waitlist.",
       buttonText: "Share Now",
-      // translate: "translate-x-[0]",
       index: "z-[2]",
-      // rotation: "rotate-[-6deg] xl:rotate-0",
       shadow: "xl:shadow-[0px_0px_100px_#76d9891a]",
       imageSrc: "/frame-42-3.svg",
       icon: <SemiCircleIcon fillColor="#74DB8A" />,
+      initialRotation: 0,
     },
     {
       title: "Climb the ranks & Unlock Rewards",
       description:
         "The more people you bring, the faster you rise. Earn early access, unlock exclusive perks, and become a top-tier planner in the BonBon community.",
       buttonText: "Share Now",
-      // translate: "translate-x-[-160px]",
       index: "z-[3] xl:z-[1]",
-      // rotation: "xl:rotate-[15deg]",
       shadow: "xl:shadow-[0px_0px_100px_#eb612b1a]",
       imageSrc: "/frame-42-5.svg",
       icon: <SemiCircleIcon fillColor="#EB612B" />,
+      initialRotation: 15,
     },
   ];
 
+  useEffect(() => {
+    if (!cardsRef.current) return;
+
+    // Set initial positions with overlapping rotations
+    gsap.set(cardRefs.current, {
+      rotation: (index) => cards[index].initialRotation,
+      x: (index) => (index === 0 ? 100 : index === 2 ? -100 : 0),
+    });
+
+    // Create the animation timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: cardsRef.current,
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none reverse",
+        markers: true,
+      },
+    });
+
+    // Animate cards to final positions
+    tl.to(cardRefs.current, {
+      rotation: 0,
+      opacity: 1,
+      y: 0,
+      x: 0,
+      duration: 0.6,
+      ease: "power3.out",
+    });
+
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
   return (
     <section className="relative w-full min-h-screen py-20 lg:py-[100px] xl:py-[110px] 2xl:py-[140px]">
-      <div className="container mx-auto">
+      <div className="container px-4 mx-auto">
         <div className="flex flex-col w-full max-w-[1320px] items-start gap-[30px] mb-10 xl:mb-[100px]">
           <h2 className="self-stretch">Bring Friends. Jump the Line</h2>
           <p className="self-stretch text-white lg:text-[#B1B1B1]">
@@ -57,14 +99,18 @@ export const CallToActionSection = (): JSX.Element => {
           </p>
         </div>
 
-        <div className="relative max-w-[1320px] md:gap-5 lg:gap-8 xl:gap-5 w-full mx-auto flex flex-col xl:flex-row">
+        <div
+          ref={cardsRef}
+          className="relative max-w-[1320px] md:gap-5 lg:gap-8 xl:gap-5 w-full mx-auto flex flex-col xl:flex-row"
+        >
           {cards.map((card, index) => (
             <Card
               key={index}
+              ref={(el) => (cardRefs.current[index] = el)}
               className={`flex flex-col relative items-start p-10 2xl:p-[50px] rounded-[50px] overflow-hidden border border-solid border-[#ffffff1a] ${card.shadow} ${card.index} bg-[linear-gradient(0deg,rgba(30,30,30,1)_0%,rgba(30,30,30,1)_100%)]`}
             >
-              <CardContent className="flex flex-col w-full items-start gap-10 p-0 h-full justify-between">
-                <div className="flex flex-col items-start gap-4 relative self-stretch w-full">
+              <CardContent className="flex flex-col gap-10 justify-between items-start p-0 w-full h-full">
+                <div className="flex relative flex-col gap-4 items-start self-stretch w-full">
                   <h3 className="self-stretch font-medium text-white text-xl lg:text-2xl 2xl:text-4xl tracking-[0] leading-[normal]">
                     {card.title.includes("\n") ? (
                       <>
@@ -86,7 +132,7 @@ export const CallToActionSection = (): JSX.Element => {
                     {card.buttonText}
                   </span>
                 </Button>
-                <div className="absolute bottom-0 right-0 rotate-180 translate-y-1/2">
+                <div className="absolute right-0 bottom-0 rotate-180 translate-y-1/2">
                   {card.icon}
                 </div>
               </CardContent>
