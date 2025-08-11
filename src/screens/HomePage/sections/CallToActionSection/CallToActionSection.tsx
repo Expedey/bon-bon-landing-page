@@ -53,7 +53,21 @@ export const CallToActionSection = (): JSX.Element => {
   useEffect(() => {
     if (!cardsRef.current) return;
 
-    // Set initial positions with overlapping rotations
+    // Check if screen width is >= 1280px (xl breakpoint)
+    const isLargeScreen = window.innerWidth >= 1280;
+
+    if (!isLargeScreen) {
+      // On smaller screens, just set cards to visible state without rotation animation
+      gsap.set(cardRefs.current, {
+        opacity: 1,
+        rotation: 0,
+        x: 0,
+        y: 0,
+      });
+      return;
+    }
+
+    // Set initial positions with overlapping rotations (only on large screens)
     gsap.set(cardRefs.current, {
       rotation: (index) => cards[index].initialRotation,
       x: (index) => (index === 0 ? 100 : index === 2 ? -100 : 0),
@@ -101,13 +115,13 @@ export const CallToActionSection = (): JSX.Element => {
 
         <div
           ref={cardsRef}
-          className="relative max-w-[1320px] md:gap-5 lg:gap-8 xl:gap-5 w-full mx-auto flex flex-col xl:flex-row"
+          className="relative max-w-[1320px] xl:gap-5 w-full mx-auto flex flex-col xl:flex-row"
         >
           {cards.map((card, index) => (
             <Card
               key={index}
               ref={(el) => (cardRefs.current[index] = el)}
-              className={`flex flex-col relative items-start p-10 2xl:p-[50px] rounded-[50px] overflow-hidden border border-solid border-[#ffffff1a] ${card.shadow} ${card.index} bg-[linear-gradient(0deg,rgba(30,30,30,1)_0%,rgba(30,30,30,1)_100%)]`}
+              className={`flex flex-col relative items-start p-10 2xl:p-[50px] rounded-[50px] overflow-hidden border border-solid border-[#ffffff1a] ${card.shadow} ${card.index} bg-[linear-gradient(0deg,rgba(30,30,30,1)_0%,rgba(30,30,30,1)_100%)] max-lg:[&:nth-child(2)]:!rotate-[-6deg] max-xl:[&:nth-child(2)]:!rotate-[-4deg]`}
             >
               <CardContent className="flex flex-col gap-10 justify-between items-start p-0 w-full h-full">
                 <div className="flex relative flex-col gap-4 items-start self-stretch w-full">
