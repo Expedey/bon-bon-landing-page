@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "../../../../components/ui/card";
 import {
   Table,
@@ -11,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { SemiCircleIcon } from "@/components/icons";
+import { gsap } from "gsap";
 
 type TCardWithButton = {
   title: string;
@@ -26,7 +28,7 @@ const CardWithButton = ({
   buttonLink,
 }: TCardWithButton) => {
   return (
-    <div className="flex flex-col gap-10 text-white">
+    <div className="flex flex-col gap-6 text-white lg:gap-10">
       <div className="bg-[#1E1E1E] p-[30px] xl:p-[50px] border border-[#FFFFFF1A] rounded-[20px] xl:rounded-[50px] shadow-[0px_0px_100px_0px_#76D9891A] lg:shadow-none">
         <h3 className="text-2xl font-medium xl:text-4xl">{title}</h3>
         {description && (
@@ -35,7 +37,7 @@ const CardWithButton = ({
           </p>
         )}
       </div>
-      <Link href={buttonLink} className="ml-auto w-fit">
+      <Link href={buttonLink} className="mr-auto lg:mr-0 lg:ml-auto w-fit">
         <Button>{buttonText}</Button>
       </Link>
     </div>
@@ -43,6 +45,9 @@ const CardWithButton = ({
 };
 
 export const AppShowcaseSection = (): JSX.Element => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   // Data for the table rows
   const tableData = [
     {
@@ -86,9 +91,9 @@ export const AppShowcaseSection = (): JSX.Element => {
     {
       title: "Specific thresholds unlock access to perks",
       description: `
-        Example:\n
-        3 invites = early access \n
-        10 invites = invite only-experiences \n
+        Example:
+        3 invites = early access
+        10 invites = invite only-experiences
         Top 10% = special recognition or premium features
       `,
       buttonText: "Each referral",
@@ -111,13 +116,98 @@ export const AppShowcaseSection = (): JSX.Element => {
     },
   ];
 
+  useEffect(() => {
+    if (!containerRef.current || cardRefs.current.length === 0) return;
+
+    // Check screen size
+    const isLargeScreen = window.innerWidth >= 1024;
+    let currentCardIndex = 0;
+
+    // Set initial positions based on screen size
+    gsap.set(cardRefs.current, {
+      [isLargeScreen ? "y" : "x"]: (index: number) =>
+        index === 0 ? 0 : isLargeScreen ? 400 : 400,
+      opacity: (index: number) => (index === 0 ? 1 : 0),
+    });
+
+    const animateToNext = () => {
+      const nextIndex = (currentCardIndex + 1) % cards.length;
+
+      // Get current and next card elements
+      const currentCard = cardRefs.current[currentCardIndex];
+      const nextCard = cardRefs.current[nextIndex];
+
+      if (!currentCard || !nextCard) return;
+
+      // Create timeline
+      const tl = gsap.timeline();
+
+      // First, position the next card outside the viewport
+      gsap.set(nextCard, {
+        [isLargeScreen ? "y" : "x"]: isLargeScreen ? 400 : 400,
+        opacity: 0,
+      });
+
+      // Animate current card out (slide up/left and fade out)
+      tl.to(
+        currentCard,
+        {
+          [isLargeScreen ? "y" : "x"]: isLargeScreen ? -400 : -400,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.inOut",
+        },
+        0
+      );
+
+      // Animate next card in (slide up/left from bottom/right and fade in)
+      tl.to(
+        nextCard,
+        {
+          [isLargeScreen ? "y" : "x"]: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.inOut",
+        },
+        0
+      );
+
+      // After animation, reset all cards except the active one
+      tl.call(
+        () => {
+          cardRefs.current.forEach((card, index) => {
+            if (card && index !== nextIndex) {
+              gsap.set(card, {
+                [isLargeScreen ? "y" : "x"]: isLargeScreen ? 400 : 400,
+                opacity: 0,
+              });
+            }
+          });
+        },
+        [],
+        0.8
+      );
+
+      // Update the current index
+      currentCardIndex = nextIndex;
+    };
+
+    // Start the interval
+    const interval = setInterval(animateToNext, 3000);
+
+    // Cleanup
+    return () => {
+      clearInterval(interval);
+    };
+  }, [cards.length]);
+
   return (
     <div className="relative w-full mx-auto lg:px-[30px]">
       <Card className="bg-[#FFFFFF05] rounded-[50px] overflow-hidden py-[86px] border border-[#FFFFFF1A]">
         <div className="text-center max-w-[1320px] w-full mx-auto mb-10 px-4">
           <h2>Top Sharers Get First Access</h2>
           <p className="mt-10">
-            “Each invite boosts your rank. The higher you climb, the better your
+            "Each invite boosts your rank. The higher you climb, the better your
             rewards.
           </p>
         </div>
@@ -204,9 +294,27 @@ export const AppShowcaseSection = (): JSX.Element => {
               </div>
             </CardContent>
           </div>
-          <div className="flex flex-[2] flex-col gap-10 px-4 lg:px-0 max-w-[588px] w-full mx-auto lg:mx-0 lg:mt-20">
+          <div
+            ref={containerRef}
+            className="flex flex-[2] lg:flex-col overflow-hidden px-4 min-h-[300px] lg:min-h-[auto] lg:px-0 max-w-[588px] w-full mx-auto lg:mx-0 lg:mt-20 relative"
+          >
             {cards.map((card, index) => (
-              <CardWithButton key={index} {...card} />
+              <div
+                key={index}
+                ref={(el) => (cardRefs.current[index] = el)}
+                className={`absolute ${
+                  index === 0 ? "opacity-100" : "opacity-0"
+                }`}
+                style={{
+                  top: "0",
+                  left: "0",
+                  right: "0",
+                  paddingLeft: "1rem",
+                  paddingRight: "1rem",
+                }}
+              >
+                <CardWithButton {...card} />
+              </div>
             ))}
           </div>
         </div>
