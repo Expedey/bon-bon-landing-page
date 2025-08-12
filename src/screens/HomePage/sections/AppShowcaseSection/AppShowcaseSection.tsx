@@ -203,7 +203,7 @@ export const AppShowcaseSection = (): JSX.Element => {
 
   return (
     <div className="relative w-full mx-auto lg:px-[30px]">
-      <Card className="bg-[#FFFFFF05] rounded-[50px] overflow-hidden py-[86px] border border-[#FFFFFF1A]">
+      <Card className="bg-[#FFFFFF05] rounded-[50px] overflow-hidden py-10 lg:py-[86px] border border-[#FFFFFF1A]">
         <div className="text-center max-w-[1320px] w-full mx-auto mb-10 px-4">
           <h2>Top Sharers Get First Access</h2>
           <p className="mt-10">
@@ -296,7 +296,7 @@ export const AppShowcaseSection = (): JSX.Element => {
           </div>
           <div
             ref={containerRef}
-            className="flex flex-[2] lg:flex-col overflow-hidden px-4 min-h-[300px] lg:min-h-[auto] lg:px-0 max-w-[588px] w-full mx-auto lg:mx-0 lg:mt-20 relative"
+            className="flex flex-[2] lg:flex-col lg:overflow-hidden px-4 min-h-[350px] lg:min-h-[auto] lg:px-0 max-w-[588px] w-full mx-auto lg:mx-0 lg:mt-20 relative"
           >
             {cards.map((card, index) => (
               <div
