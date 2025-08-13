@@ -7,12 +7,14 @@ import { HandIcon, SemiCircleIcon, WaveIcon } from "@/components/icons";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { div } from "motion/react-client";
+import { cn } from "@/lib/utils";
 
 type TWaveText = {
   text: string;
+  className?: string;
 };
 
-const WaveText = ({ text }: TWaveText) => {
+const WaveText = ({ text, className }: TWaveText) => {
   const handRef = useRef<HTMLDivElement>(null);
   const leftWaveRef = useRef<HTMLDivElement>(null);
   const rightWaveRef = useRef<HTMLDivElement>(null);
@@ -71,23 +73,25 @@ const WaveText = ({ text }: TWaveText) => {
   }, []);
 
   return (
-    <div className="flex gap-5 items-center">
-      <div className="w-[100px] h-[90px] overflow-y-visible overflow-x-hidden relative flex items-center justify-center">
+    <div
+      className={cn("flex gap-5 justify-end items-center lg:flex-1", className)}
+    >
+      <div className="w-[60px] lg:w-[100px] h-[90px] overflow-y-visible overflow-x-hidden relative flex items-center justify-center">
         <div
           ref={leftWaveRef}
           className="flex absolute flex-col -rotate-[65deg] left-[-30px] top-[60px]"
         >
-          <WaveIcon />
-          <WaveIcon />
+          <WaveIcon className="max-lg:w-[10px]" />
+          <WaveIcon className="max-lg:w-[10px] max-lg:translate-y-[-4px]" />
         </div>
         <div ref={handRef}>
-          <HandIcon />
+          <HandIcon className="max-lg:w-[40px] max-lg:h-[40px]" />
         </div>
         <div ref={rightWaveRef} className="absolute top-[10px] right-[10px]">
-          <WaveIcon />
+          <WaveIcon className="max-lg:w-[14px]" />
         </div>
       </div>
-      <h2 className="text-4xl font-medium leading-normal text-white xl:text-5xl 2xl:text-6xl">
+      <h2 className="text-4xl font-medium leading-normal text-white min-w-fit xl:text-5xl 2xl:text-6xl">
         {text}
       </h2>
     </div>
@@ -95,8 +99,8 @@ const WaveText = ({ text }: TWaveText) => {
 };
 
 const SliderSection = () => {
-  const [currentElement, setCurrentElement] = useState(5);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(0);
+  const [goToSlide, setGoToSlide] = useState<number | null>(null);
 
   const painPoints = [
     { id: 1, regular: "Outdated ", bold: "look & feel" },
@@ -110,58 +114,77 @@ const SliderSection = () => {
     { id: 9, regular: "Low ", bold: "velocity" },
   ];
 
-  const duplicatedArray = [...painPoints, ...painPoints].map(
-    (point, index) => ({
-      ...point,
-      id: index + 1,
-    })
-  );
+  // Convert painPoints to slides format
+  const slides = painPoints.map((point, i) => ({
+    key: i,
+    content: point,
+  }));
 
-  const generateBlur = (id: number) => {
-    // Calculate the distance from the current element
-    const distance = Math.abs(id - currentElement);
-
-    // If it's the current element, no blur
-    if (distance === 0) {
-      return "blur-[0px]";
-    }
-
-    // Calculate blur amount: 2px per step away from current element
-    const blurAmount = distance * 2;
-
-    return `blur-[${blurAmount}px]`;
+  // Modulo function from the original code
+  const mod = (a: number, b: number) => {
+    return ((a % b) + b) % b;
   };
 
+  const modBySlidesLength = (index: number) => {
+    return mod(index, slides.length);
+  };
+
+  const moveSlide = (direction: number) => {
+    setIndex(modBySlidesLength(index + direction));
+    setGoToSlide(null);
+  };
+
+  const clampOffsetRadius = (offsetRadius: number) => {
+    const upperBound = Math.floor((slides.length - 1) / 2);
+
+    if (offsetRadius < 0) {
+      return 0;
+    }
+    if (offsetRadius > upperBound) {
+      return upperBound;
+    }
+
+    return offsetRadius;
+  };
+
+  const getPresentableSlides = () => {
+    let offsetRadius = 4; // Default from original code
+    offsetRadius = clampOffsetRadius(offsetRadius);
+    const presentableSlides = [];
+
+    for (let i = -offsetRadius; i < 1 + offsetRadius; i++) {
+      presentableSlides.push(slides[modBySlidesLength(index + i)]);
+    }
+
+    return presentableSlides;
+  };
+
+  // Auto-slide every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentElement((prev) => {
-        if (prev === duplicatedArray.length) {
-          return 1;
-        } else {
-          return prev + 1;
-        }
-      });
-      const removedItem = duplicatedArray.shift();
-      if (removedItem) {
-        duplicatedArray.push(removedItem);
-      }
+      moveSlide(1); // Move to next slide
     }, 3000);
+
     return () => clearInterval(interval);
-  }, [duplicatedArray.length]);
+  }, [index]);
 
-  console.log(duplicatedArray, "__duplicatedArray");
+  const getItemStyle = (presentableIndex: number) => {
+    const offsetRadius = clampOffsetRadius(4);
+    const distance = Math.abs(presentableIndex - offsetRadius);
 
-  // Smooth movement animation
-  useEffect(() => {
-    if (containerRef.current) {
-      const container = containerRef.current;
-      const currentElementIndex = currentElement - 1;
-      const elementHeight = 80; // Approximate height of each element + gap
-      const scrollPosition = currentElementIndex * elementHeight;
+    const opacity = Math.max(1 - distance * 0.3, 0.3);
+    const blur = Math.min(distance * 1.5, 6);
+    // const scale = Math.max(1 - distance * 0.1, 0.8);
+    const translateY = (presentableIndex - offsetRadius) * 80;
 
-      container.style.transform = `translateY(-${scrollPosition}px)`;
-    }
-  }, [currentElement]);
+    return {
+      opacity,
+      filter: `blur(${blur}px)`,
+      transform: `translateY(${translateY}px)`,
+      transition: "all 0.5s ease-out",
+    };
+  };
+
   return (
     <div className="relative w-screen min-h-screen flex items-stretch bg-[linear-gradient(180deg,rgba(15,12,41,1)_0%,rgba(21,16,67,1)_100%)]">
       {/* Top Shapes */}
@@ -181,49 +204,45 @@ const SliderSection = () => {
           <SemiCircleIcon className="w-[130px] h-[130px]" />
         </div>
         <div className="flex relative justify-center items-center px-6 mx-auto h-full">
-          {/* Decorative elements */}
-
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20 xl:gap-32 2xl:gap-[154px] relative h-full">
+          <div className="flex flex-col w-full lg:flex-row items-center justify-center gap-10 lg:gap-20 xl:gap-32 2xl:gap-[154px] relative h-full">
             {/* Left side - "Say bye bye to" */}
             <WaveText text="Say bye bye to" />
-            {/* Right side - Scrolling pain points */}
-            <div className="relative h-[400px]">
-              {/* Pain points list */}
-              <div
-                ref={containerRef}
-                className="flex relative flex-col gap-8 items-center w-full transition-transform duration-1000 ease-out lg:items-start"
-                style={{
-                  paddingTop: "160px",
-                  paddingBottom: "160px",
-                }}
-              >
-                {painPoints.map((point, index) => {
-                  const distance = Math.abs(point.id - currentElement);
-                  const opacity = Math.max(1 - distance * 0.1, 0.3);
 
-                  return (
-                    <div
-                      key={index}
-                      className={`relative w-fit text-white bg-[#FFFFFF05] 2xl:text-4xl border border-[#FFFFFF1A] rounded-[50px] py-[10px] px-[30px] transition-all duration-300 ease-out backdrop-blur-sm ${generateBlur(
-                        point.id
-                      )}`}
-                      style={{
-                        opacity: opacity,
-                      }}
-                    >
-                      <span className="">{point.regular}</span>
-                      <span className="">{point.bold}</span>
-                      {point.regular2 && (
-                        <span className="">{point.regular2}</span>
-                      )}
-                    </div>
-                  );
-                })}
+            {/* Right side - Vertical Carousel */}
+            <div className="relative lg:flex-1 max-lg:min-h-[400px] max-lg:w-full max-lg:overflow-hidden">
+              <div className="flex flex-col justify-center w-full h-full max-lg:items-center">
+                {getPresentableSlides().map((slide, presentableIndex) => (
+                  <div
+                    key={slide.key}
+                    className="absolute text-white min-w-max bg-[#FFFFFF05] 2xl:text-4xl border border-[#FFFFFF1A] rounded-[50px] py-[10px] px-[30px] backdrop-blur-sm"
+                    style={getItemStyle(presentableIndex)}
+                  >
+                    <span className="">{slide.content.regular}</span>
+                    <span className="">{slide.content.bold}</span>
+                    {slide.content.regular2 && (
+                      <span className="">{slide.content.regular2}</span>
+                    )}
+                  </div>
+                ))}
               </div>
+
+              {/* Navigation Buttons */}
+              {/* <div className="flex absolute bottom-4 left-1/2 z-10 gap-4 transform -translate-x-1/2">
+                <button
+                  onClick={() => moveSlide(-1)}
+                  className="px-4 py-2 text-white bg-white bg-opacity-20 rounded-lg transition-all duration-200 hover:bg-opacity-30"
+                >
+                  ↑
+                </button>
+                <button
+                  onClick={() => moveSlide(1)}
+                  className="px-4 py-2 text-white bg-white bg-opacity-20 rounded-lg transition-all duration-200 hover:bg-opacity-30"
+                >
+                  ↓
+                </button>
+              </div> */}
             </div>
           </div>
-
-          {/* Decorative glows */}
         </div>
       </div>
     </div>
@@ -241,7 +260,7 @@ const BenefitsSection = ({ benefits }: { benefits: TBenefit[] }) => {
     <div className="relative w-full h-full bg-[#6A4AFD] py-20">
       <div className="relative max-w-[1440px] w-full mx-auto px-6 h-full flex flex-col justify-center">
         {/* Section title */}
-        <WaveText text="Say hello to" />
+        <WaveText text="Say hello to" className="justify-start" />
 
         {/* Benefits cards grid */}
         <div className="grid mt-10 lg:mt-[60px] grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-[30px]">

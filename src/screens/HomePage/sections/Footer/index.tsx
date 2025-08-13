@@ -72,7 +72,7 @@ const Footer = (): JSX.Element => {
           </div>
 
           {/* Newsletter Section */}
-          <div className="flex flex-col justify-end items-start gap-10 max-w-[467px] lg:max-w-[350px] 2xl:max-w-[467px] w-full">
+          <div className="flex flex-col justify-end items-start gap-4 lg:gap-10 max-w-[467px] lg:max-w-[350px] 2xl:max-w-[467px] w-full">
             <div className="relative w-full">
               <h3 className="text-white text-[22px] lg:text-[26px] 2xl:text-[36px] font-medium tracking-[0] mb-[15px]">
                 Our newsletter
@@ -85,12 +85,12 @@ const Footer = (): JSX.Element => {
               </p>
             </div>
 
-            <div className="flex w-full items-center relative rounded-[50px] bg-[linear-gradient(0deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.1)_100%)]">
+            <div className="flex max-lg:py-1.5 max-lg:pr-1.5 w-full items-center relative rounded-[50px] bg-[linear-gradient(0deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.1)_100%)]">
               <Input
-                className="flex-1 h-auto p-[26px] pr-4 border-none bg-transparent text-white !text-lg leading-normal border border-[#ffffff26] focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-white"
+                className="flex-1 h-auto max-lg:px-6 max-lg:py-2 lg:p-[26px] pr-4 border-none bg-transparent text-white text-sm lg:!text-lg leading-normal border border-[#ffffff26] focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-white"
                 placeholder="Enter Your Email"
               />
-              <div className="h-20 py-2.5 px-2.5 aspect-square">
+              <div className="h-[48px] lg:h-20 lg:py-2.5 lg:px-2.5 aspect-square">
                 <button className="p-0 aspect-square rounded-full w-full h-full shadow-[inset_-4px_-4px_4px_0px_#5134D2,inset_4px_4px_4px_0px_#623FFE] hover:shadow-[inset_-4px_-4px_4px_0px_#6043e0,inset_4px_4px_4px_0px_#7151ff] bg-[linear-gradient(180deg,_#6A4AFD_0%,_#3015A9_100%)] flex items-center justify-center">
                   <SendButtonIcon />
                 </button>
@@ -115,7 +115,7 @@ const Footer = (): JSX.Element => {
         </div>
 
         {/* Footer Bar */}
-        <div className="flex mt-[60px] items-center w-full justify-between px-4 py-5 lg:px-11 lg:py-[15px] rounded-[50px] border border-[#ffffff26] bg-[linear-gradient(0deg,rgba(51,51,51,1)_0%,rgba(51,51,51,1)_100%)]">
+        <div className="flex mt-[30px] lg:mt-[60px] items-center w-full justify-between px-4 py-5 lg:px-11 lg:py-[15px] rounded-[50px] border border-[#ffffff26] bg-[linear-gradient(0deg,rgba(51,51,51,1)_0%,rgba(51,51,51,1)_100%)]">
           {/* Social Media Icons */}
           <div className="max-w-[327px] w-full items-center gap-5 relative hidden lg:flex">
             {socialIcons.map((icon, index) => (
