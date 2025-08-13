@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { SemiCircleIcon, SendButtonIcon } from "@/components/icons";
 import Image from "next/image";
 
-export const MockupDisplaySection = (): JSX.Element => {
+const Footer = (): JSX.Element => {
   const pathname = usePathname();
   // Navigation links data
   const navLinks = [
@@ -155,3 +155,5 @@ export const MockupDisplaySection = (): JSX.Element => {
     </section>
   );
 };
+
+export default Footer;

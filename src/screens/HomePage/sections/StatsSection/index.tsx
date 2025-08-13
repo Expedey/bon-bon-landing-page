@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent } from "../../../../components/ui/card";
 import { SemiCircleIcon } from "@/components/icons";
 
-export const UserStatsSection = (): JSX.Element => {
+const StatsSection = (): JSX.Element => {
   // Data for stats cards to enable mapping
   const statsCards = [
     {
@@ -102,3 +102,5 @@ export const UserStatsSection = (): JSX.Element => {
     </section>
   );
 };
+
+export default StatsSection;

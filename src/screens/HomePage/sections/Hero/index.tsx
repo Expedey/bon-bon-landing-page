@@ -4,7 +4,7 @@ import { Card, CardContent } from "../../../../components/ui/card";
 import Image from "next/image";
 import { CircleIcon, SemiCircleIcon } from "@/components/icons";
 
-export const HeaderSection = (): JSX.Element => {
+const Hero = (): JSX.Element => {
   return (
     <section className="h-screen px-4 md:px-6 lg:px-8 xl:px-[30px] py-4 md:py-6 lg:py-8 xl:py-[30px]">
       <Card className="h-full flex items-center w-full rounded-[50px] border border-[#ffffff1a] bg-[linear-gradient(0deg,rgba(255,255,255,0.02)_0%,rgba(255,255,255,0.02)_100%)]">
@@ -36,7 +36,7 @@ export const HeaderSection = (): JSX.Element => {
           </div>
 
           <div className="flex flex-col items-center max-w-[750px] w-full mx-auto relative z-[1]">
-            <h1 className="w-fit text-[42px] leading-tight text-white lg:text-[56px] xl:text-[74px] 2xl:text-[110px] 2xl:leading-[132px] font-bold text-center">
+            <h1 className="w-fit text-[42px] leading-tight text-white lg:text-[56px] xl:text-[74px] 2xl:text-[110px] 2xl:leading-[132px] text-center">
               Start Living
               <br />
               Stop Planning
@@ -54,3 +54,5 @@ export const HeaderSection = (): JSX.Element => {
     </section>
   );
 };
+
+export default Hero;

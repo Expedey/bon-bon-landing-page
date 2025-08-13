@@ -7,7 +7,13 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 
-function Navbar({ className }: { className?: string }) {
+function Navbar({
+  className,
+  isVisible = true,
+}: {
+  className?: string;
+  isVisible?: boolean;
+}) {
   const pathname = usePathname();
   const links = [
     {
@@ -42,7 +48,8 @@ function Navbar({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "fixed inset-x-0 bottom-5 z-50 mx-auto max-w-full md:bottom-10 w-fit",
+        "fixed inset-x-0 bottom-5 z-50 mx-auto max-w-full md:bottom-10 w-fit transition-opacity duration-300",
+        !isVisible && "opacity-0 pointer-events-none",
         className
       )}
     >

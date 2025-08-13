@@ -44,7 +44,7 @@ const CardWithButton = ({
   );
 };
 
-export const AppShowcaseSection = (): JSX.Element => {
+const AppShowcaseSection = (): JSX.Element => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -322,3 +322,5 @@ export const AppShowcaseSection = (): JSX.Element => {
     </div>
   );
 };
+
+export default AppShowcaseSection;

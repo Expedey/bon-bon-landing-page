@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-export const CallToActionSection = (): JSX.Element => {
+const ReferralSection = (): JSX.Element => {
   const cardsRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -56,6 +56,8 @@ export const CallToActionSection = (): JSX.Element => {
     // Check if screen width is >= 1280px (xl breakpoint)
     const isLargeScreen = window.innerWidth >= 1280;
 
+    console.log(isLargeScreen, "__isLargeScreen");
+
     if (!isLargeScreen) {
       // On smaller screens, just set cards to visible state without rotation animation
       gsap.set(cardRefs.current, {
@@ -69,15 +71,16 @@ export const CallToActionSection = (): JSX.Element => {
 
     // Set initial positions with overlapping rotations (only on large screens)
     gsap.set(cardRefs.current, {
-      rotation: (index) => cards[index].initialRotation,
-      x: (index) => (index === 0 ? 100 : index === 2 ? -100 : 0),
+      rotation: (index) => (isLargeScreen ? cards[index].initialRotation : 0),
+      x: (index) =>
+        isLargeScreen ? (index === 0 ? 100 : index === 2 ? -100 : 0) : 0,
     });
 
     // Create the animation timeline
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: cardsRef.current,
-        start: "top 80%",
+        start: "25% 80%",
         end: "bottom 20%",
         toggleActions: "play none none reverse",
       },
@@ -100,7 +103,7 @@ export const CallToActionSection = (): JSX.Element => {
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen py-20 lg:py-[100px] xl:py-[110px] 2xl:py-[140px]">
+    <section className="relative w-full min-h-screen py-20 lg:py-[100px] xl:py-[110px] 2xl:py-[140px] flex items-center">
       <div className="container px-4 mx-auto">
         <div className="flex flex-col w-full max-w-[1320px] items-start gap-[30px] mb-10 xl:mb-[100px]">
           <h2 className="self-stretch">Bring Friends. Jump the Line</h2>
@@ -156,3 +159,5 @@ export const CallToActionSection = (): JSX.Element => {
     </section>
   );
 };
+
+export default ReferralSection;

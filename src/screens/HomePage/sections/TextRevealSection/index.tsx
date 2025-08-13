@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-export const FooterSection = (): JSX.Element => {
+const TextRevealSection = (): JSX.Element => {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -180,3 +180,5 @@ export const FooterSection = (): JSX.Element => {
     </section>
   );
 };
+
+export default TextRevealSection;
