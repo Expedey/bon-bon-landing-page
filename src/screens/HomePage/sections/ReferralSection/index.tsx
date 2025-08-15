@@ -40,7 +40,7 @@ const ReferralSection = (): JSX.Element => {
     {
       title: "Climb the ranks & Unlock Rewards",
       description:
-        "The more people you bring, the faster you rise. Earn early access, unlock exclusive perks, and become a top-tier planner in the BonBon community.",
+        "The more people you bring, the faster you rise. Earn early access, unlock exclusive perks, and become an Elite hangout curator in the BonBon community.",
       buttonText: "Share Now",
       index: "z-[3] xl:z-[1]",
       shadow: "xl:shadow-[0px_0px_100px_#eb612b1a]",

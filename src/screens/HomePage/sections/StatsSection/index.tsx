@@ -84,7 +84,7 @@ const StatsSection = (): JSX.Element => {
                 <div className="absolute top-[0px] left-[-40px] -translate-y-1/2">
                   {card.icon}
                 </div>
-                <CardContent className="flex flex-col items-start gap-4 px-10 py-[50px] h-full">
+                <CardContent className="flex flex-col items-start gap-4 px-9 py-[50px] h-full">
                   <h2 className="w-full text-white xl:text-[56px] text-center">
                     {card.value}
                   </h2>
