@@ -29,10 +29,12 @@ const CardWithButton = ({
 }: TCardWithButton) => {
   return (
     <div className="flex flex-col gap-6 text-white lg:gap-10">
-      <div className="bg-[#1E1E1E] p-[30px] xl:p-[50px] border border-[#FFFFFF1A] rounded-[20px] xl:rounded-[50px] shadow-[0px_0px_100px_0px_#76D9891A] lg:shadow-none">
-        <h3 className="text-2xl font-medium xl:text-4xl">{title}</h3>
+      <div className="bg-[#1E1E1E] p-4 2xl:p-[50px] border border-[#FFFFFF1A] rounded-[20px] xl:rounded-[50px] shadow-[0px_0px_100px_0px_#76D9891A] lg:shadow-none">
+        <h3 className="text-base md:text-2xl font-medium xl:text-3xl 2xl:text-4xl">
+          {title}
+        </h3>
         {description && (
-          <p className="text-white text-base xl:text-[22px] mt-5 break-words whitespace-pre-line">
+          <p className="text-white text-base 2xl:text-[22px] mt-5 break-words whitespace-pre-line">
             {description}
           </p>
         )}
@@ -101,17 +103,13 @@ const AppShowcaseSection = (): JSX.Element => {
     },
     {
       title: "Earn referral gives the user points or XP",
-      buttonText: "Join the waitlist",
+      buttonText: "Each referral",
       buttonLink: "/",
     },
     {
-      title: "Earn referral gives the user points or XP",
-      buttonText: "Join the waitlist",
-      buttonLink: "/",
-    },
-    {
-      title: "Earn referral gives the user points or XP",
-      buttonText: "Join the waitlist",
+      title:
+        "Users are incentivized by both milestone rewards and relative ranking",
+      buttonText: "Each referral",
       buttonLink: "/",
     },
   ];
@@ -296,7 +294,7 @@ const AppShowcaseSection = (): JSX.Element => {
           </div>
           <div
             ref={containerRef}
-            className="flex flex-[2] lg:flex-col lg:overflow-hidden px-4 min-h-[350px] lg:min-h-[auto] lg:px-0 max-w-[588px] w-full mx-auto lg:mx-0 lg:mt-20 relative"
+            className="flex flex-[2] lg:flex-col lg:overflow-hidden max-lg:px-4 min-h-[350px] lg:min-h-[auto] lg:px-0 max-w-[588px] w-full mx-auto lg:mx-0 lg:mt-20 relative"
           >
             {cards.map((card, index) => (
               <div
@@ -305,13 +303,6 @@ const AppShowcaseSection = (): JSX.Element => {
                 className={`absolute ${
                   index === 0 ? "opacity-100" : "opacity-0"
                 }`}
-                style={{
-                  top: "0",
-                  left: "0",
-                  right: "0",
-                  paddingLeft: "1rem",
-                  paddingRight: "1rem",
-                }}
               >
                 <CardWithButton {...card} />
               </div>

@@ -418,7 +418,7 @@ const FeaturesSection = ({
         // min-h-[270vh] sm:min-h-[210vh] md:min-h-[190vh] lg:min-h-[130vh]"
       >
         {/* Slider Section */}
-        <div ref={goodbyeRef}>
+        <div id="goodbye" ref={goodbyeRef}>
           <div
             ref={sliderSectionRef}
             className="relative w-screen min-h-screen h-fit"

@@ -82,7 +82,8 @@ const ReferralSection = (): JSX.Element => {
         trigger: cardsRef.current,
         start: "25% 80%",
         end: "bottom 20%",
-        toggleActions: "play none none reverse",
+        toggleActions: "play reverse restart reverse",
+        // toggleActions: "play none none reverse",
       },
     });
 

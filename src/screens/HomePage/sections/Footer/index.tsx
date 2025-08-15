@@ -6,21 +6,26 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SemiCircleIcon, SendButtonIcon } from "@/components/icons";
 import Image from "next/image";
+import Tooltip from "@/components/ui/tooltip";
 
 const Footer = (): JSX.Element => {
   const pathname = usePathname();
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
   // Navigation links data
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Works", href: "/works" },
-    { name: "Goodbye", href: "/goodbye" },
-    { name: "Hello", href: "/hello" },
-    { name: "Program", href: "/program" },
-    { name: "Leaderboard", href: "/leaderboard" },
+    { name: "Home", href: "/#hero" },
+    { name: "Works", href: "/#works" },
+    { name: "Goodbye", href: "/#goodbye" },
+    { name: "Hello", href: "/#hello" },
+    { name: "Program", href: "/#program" },
+    { name: "Leaderboard", href: "/#leaderboard" },
+    { name: "Terms & Condition", href: "/terms-and-conditions" },
+    { name: "Privacy Policy", href: "/privacy-policy" },
   ];
 
   // Footer links data
@@ -30,25 +35,25 @@ const Footer = (): JSX.Element => {
   ];
 
   // Social media icons data
-  const socialIcons = [
-    { src: "/images/wa.svg", alt: "Whatsapp", link: "https://google.com" },
-    { src: "/images/x.svg", alt: "X", link: "https://google.com" },
-    { src: "/images/insta.svg", alt: "Instagram", link: "https://google.com" },
+  const socialIcons: { src: string; alt: string; link?: string }[] = [
+    { src: "/images/wa.svg", alt: "Whatsapp" },
+    { src: "/images/x.svg", alt: "X" },
+    { src: "/images/insta.svg", alt: "Instagram" },
   ];
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email || isSubmitting) return;
 
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
     try {
-      const response = await fetch('/api/newsletter', {
-        method: 'POST',
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
       });
@@ -62,7 +67,7 @@ const Footer = (): JSX.Element => {
         setSubmitStatus("error");
       }
     } catch (error) {
-      console.error('Newsletter submission error:', error);
+      console.error("Newsletter submission error:", error);
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
@@ -71,7 +76,7 @@ const Footer = (): JSX.Element => {
 
   return (
     <section className="w-full px-2 pb-2 lg:px-[30px] lg:pb-[30px]">
-      <div className="w-full p-6 lg:p-[30px] rounded-[40px] bg-[linear-gradient(180deg,rgba(106,74,253,1)_0%,rgba(48,21,169,1)_100%)] relative overflow-hidden">
+      <div className="w-full p-6 md:p-8 lg:px-10 lg:pt-[50px] xl:pt-[100px] xl:px-[50px] rounded-[40px] bg-[linear-gradient(180deg,rgba(106,74,253,1)_0%,rgba(48,21,169,1)_100%)] relative overflow-hidden">
         {/* Decoration svg */}
         <div className="absolute max-lg:top-1/2 max-lg:-translate-y-1/2 max-lg:right-[-25px] 2xl:top-[96px] right-0 rotate-180 2xl:translate-x-[85px]">
           <SemiCircleIcon
@@ -95,7 +100,7 @@ const Footer = (): JSX.Element => {
                   <Link
                     href={link.href}
                     key={`nav-link-${index}`}
-                    className={`px-2.5 py-1 lg:px-5 lg:py-3.5 relative lg:text-lg text-white rounded-[60px] border w-fit ${
+                    className={`px-2.5 py-1 lg:px-5 lg:py-3.5 relative lg:text-lg text-white rounded-[60px] border w-fit lg:[&:nth-last-child(-n+2)]:hidden ${
                       isActive
                         ? "bg-[#ffffff0d] rounded-[60px] border border-[#ffffff26] lg:underline lg:underline-offset-4"
                         : "border-transparent bg-transparent"
@@ -122,7 +127,7 @@ const Footer = (): JSX.Element => {
               </p>
             </div>
 
-            <form onSubmit={handleNewsletterSubmit} className="w-full">
+            <form onSubmit={handleNewsletterSubmit} className="w-full relative">
               <div className="flex max-lg:py-1.5 max-lg:pr-1.5 w-full items-center relative rounded-[50px] bg-[linear-gradient(0deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.1)_100%)]">
                 <Input
                   type="email"
@@ -135,7 +140,7 @@ const Footer = (): JSX.Element => {
                   disabled={isSubmitting}
                 />
                 <div className="h-[48px] lg:h-20 lg:py-2.5 lg:px-2.5 aspect-square">
-                  <button 
+                  <button
                     type="submit"
                     disabled={isSubmitting || !email}
                     className="p-0 aspect-square rounded-full w-full h-full shadow-[inset_-4px_-4px_4px_0px_#5134D2,inset_4px_4px_4px_0px_#623FFE] hover:shadow-[inset_-4px_-4px_4px_0px_#6043e0,inset_4px_4px_4px_0px_#7151ff] bg-[linear-gradient(180deg,_#6A4AFD_0%,_#3015A9_100%)] flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
@@ -143,31 +148,53 @@ const Footer = (): JSX.Element => {
                     <SendButtonIcon />
                   </button>
                 </div>
+                {/* Status Messages */}
+                {submitStatus === "success" && (
+                  <p className="mt-2 text-sm text-[#74DB8A] absolute -bottom-2 translate-y-full left-5">
+                    Successfully subscribed! 🎉
+                  </p>
+                )}
+                {submitStatus === "error" && (
+                  <p className="mt-2 text-sm text-red-400 absolute -bottom-2 translate-y-full left-5">
+                    Something went wrong. Please try again.
+                  </p>
+                )}
               </div>
-              
-              {/* Status Messages */}
-              {submitStatus === "success" && (
-                <p className="mt-2 text-sm text-green-400">Successfully subscribed! 🎉</p>
-              )}
-              {submitStatus === "error" && (
-                <p className="mt-2 text-sm text-red-400">Something went wrong. Please try again.</p>
-              )}
             </form>
           </div>
 
           {/* Responsive Social Media Icons */}
-          <div className="flex items-center gap-4 lg:hidden">
-            {socialIcons.map((icon, index) => (
-              <Link href={icon.link} key={`social-icon-${index}`}>
-                <Image
-                  className="relative"
-                  alt={icon.alt}
-                  src={icon.src}
-                  width={36}
-                  height={36}
-                />
-              </Link>
-            ))}
+          <div className="flex gap-4 items-center lg:hidden">
+            {socialIcons.map((icon, index) =>
+              icon?.link ? (
+                <Link href={icon?.link} key={`social-icon-${index}`}>
+                  <Image
+                    className="relative"
+                    alt={icon.alt}
+                    src={icon.src}
+                    width={36}
+                    height={36}
+                  />
+                </Link>
+              ) : (
+                <Tooltip
+                  key={`social-icon-${index}`}
+                  content={
+                    <p className="text-sm">
+                      Coming soon - we're still curating the vibes.
+                    </p>
+                  }
+                >
+                  <Image
+                    className="relative"
+                    alt={icon.alt}
+                    src={icon.src}
+                    width={36}
+                    height={36}
+                  />
+                </Tooltip>
+              )
+            )}
           </div>
         </div>
 
@@ -175,21 +202,40 @@ const Footer = (): JSX.Element => {
         <div className="flex mt-[30px] lg:mt-[60px] items-center w-full justify-between px-4 py-5 lg:px-11 lg:py-[15px] rounded-[50px] border border-[#ffffff26] bg-[linear-gradient(0deg,rgba(51,51,51,1)_0%,rgba(51,51,51,1)_100%)]">
           {/* Social Media Icons */}
           <div className="max-w-[327px] w-full items-center gap-5 relative hidden lg:flex">
-            {socialIcons.map((icon, index) => (
-              <Link href={icon.link} key={`social-icon-${index}`}>
-                <Image
-                  className="relative"
-                  alt={icon.alt}
-                  src={icon.src}
-                  width={36}
-                  height={36}
-                />
-              </Link>
-            ))}
+            {socialIcons.map((icon, index) =>
+              icon?.link ? (
+                <Link href={icon?.link} key={`social-icon-${index}`}>
+                  <Image
+                    className="relative"
+                    alt={icon.alt}
+                    src={icon.src}
+                    width={36}
+                    height={36}
+                  />
+                </Link>
+              ) : (
+                <Tooltip
+                  key={`social-icon-${index}`}
+                  content={
+                    <p className="text-sm">
+                      Coming soon - we're still curating the vibes.
+                    </p>
+                  }
+                >
+                  <Image
+                    className="relative"
+                    alt={icon.alt}
+                    src={icon.src}
+                    width={36}
+                    height={36}
+                  />
+                </Tooltip>
+              )
+            )}
           </div>
 
           {/* Copyright Text */}
-          <p className="text-white text-sm xl:text-lg text-center leading-[normal] max-lg:mx-auto ">
+          <p className="text-white text-xs xl:text-lg text-center leading-[normal] max-lg:mx-auto ">
             Copyright | 2025 BONBON. All rights reserved.
           </p>
 
