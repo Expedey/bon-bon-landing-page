@@ -295,7 +295,15 @@ const BenefitsSection = ({ benefits }: { benefits: TBenefit[] }) => {
   );
 };
 
-const FeaturesSection = (): JSX.Element => {
+type TFeaturesSectionProps = {
+  goodbyeRef: React.RefObject<HTMLDivElement>;
+  helloRef: React.RefObject<HTMLDivElement>;
+};
+
+const FeaturesSection = ({
+  goodbyeRef,
+  helloRef,
+}: TFeaturesSectionProps): JSX.Element => {
   const sliderSectionRef = useRef<HTMLDivElement>(null);
   const benefitsSectionRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -429,16 +437,20 @@ const FeaturesSection = (): JSX.Element => {
         // min-h-[270vh] sm:min-h-[210vh] md:min-h-[190vh] lg:min-h-[130vh]"
       >
         {/* Slider Section */}
-        <div
-          ref={sliderSectionRef}
-          className="relative w-screen min-h-screen h-fit"
-        >
-          <SliderSection />
+        <div ref={goodbyeRef}>
+          <div
+            ref={sliderSectionRef}
+            className="relative w-screen min-h-screen h-fit"
+          >
+            <SliderSection />
+          </div>
         </div>
 
         {/* Benefits Section */}
         <div ref={benefitsSectionRef} className="relative w-full min-h-screen">
-          <BenefitsSection benefits={benefits} />
+          <div ref={helloRef}>
+            <BenefitsSection benefits={benefits} />
+          </div>
         </div>
       </section>
     </div>

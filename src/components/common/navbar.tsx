@@ -5,44 +5,51 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { usePathname } from "next/navigation";
 
 function Navbar({
   className,
   isVisible = true,
+  activeSection = "Home",
 }: {
   className?: string;
   isVisible?: boolean;
+  activeSection?: string;
 }) {
-  const pathname = usePathname();
   const links = [
     {
       label: "Home",
       href: "/",
+      section: "Home",
     },
     {
       label: "Works",
       href: "/works",
+      section: "Works",
     },
     {
       label: "Goodbye",
       href: "/goodbye",
+      section: "Goodbye",
     },
     {
       label: "Hello",
       href: "/hello",
+      section: "Hello",
     },
     {
       label: "Program",
       href: "/program",
+      section: "Program",
     },
     {
       label: "Leaderboard",
       href: "/leaderboard",
+      section: "Leaderboard",
     },
     {
       label: "About",
       href: "/about",
+      section: "About",
     },
   ];
   return (
@@ -71,8 +78,8 @@ function Navbar({
               key={link.label}
               href={link.href}
               className={cn(
-                "text-white text-lg text-center tracking-[0] leading-[normal]",
-                pathname === link.href && "underline underline-offset-4"
+                "text-white text-lg text-center tracking-[0] leading-[normal] transition-all duration-300",
+                activeSection === link.section && "underline underline-offset-4"
               )}
             >
               {link.label}
