@@ -159,11 +159,11 @@ const SliderSection = () => {
     return presentableSlides;
   };
 
-  // Auto-slide every 3 seconds
+  // Auto-slide every 2 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       moveSlide(1); // Move to next slide
-    }, 3000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [index]);
@@ -353,10 +353,8 @@ const FeaturesSection = ({
     // Set initial position for benefits section (off-screen to the right)
     gsap.set(benefitsSectionRef.current, {
       translateX: "100vw",
-      // position: "absolute",
       top: 0,
       left: 0,
-      // width: "100%",
       minHeight: "100vh",
     });
 
@@ -364,66 +362,49 @@ const FeaturesSection = ({
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top top",
-        end: "+=300%", // Increased to 300% to allow more scroll time for benefits section
-        pin: true,
-        scrub: 1,
-        anticipatePin: 1, // Helps prevent conflicts with other pinned sections
-      },
-    });
-
-    // Phase 1: Keep slider section in view (0% to 40% of scroll)
-    tl.to(
-      sliderSectionRef.current,
-      {
-        translateX: 0,
-        duration: 0.4,
-        ease: "none",
-      },
-      0
-    );
-
-    // Phase 2: Slide benefits section in from right (40% to 60% of scroll)
-    tl.to(
-      benefitsSectionRef.current,
-      {
-        translateX: "-100vw",
-        duration: 1,
-        ease: "power2.inOut",
-        onComplete: () => {
-          ScrollTrigger.refresh(); // recalculate heights
+        start: "top top", // Start when section top reaches center of viewport
+        end: "bottom top", // End when section bottom reaches center of viewport
+        onEnter: () => {
+          // Slide benefits section in when entering
+          gsap.to(benefitsSectionRef.current, {
+            translateX: "-100vw",
+            duration: 1,
+            ease: "power2.out",
+          });
+        },
+        onEnterBack: () => {
+          // Slide benefits section in when entering from bottom
+          gsap.to(benefitsSectionRef.current, {
+            translateX: "-100vw",
+            duration: 1,
+            ease: "power2.out",
+          });
+        },
+        onLeave: () => {
+          // Slide benefits section out when leaving the section
+          gsap.to(benefitsSectionRef.current, {
+            translateX: "100vw",
+            duration: 1,
+            ease: "power2.in",
+          });
+        },
+        onLeaveBack: () => {
+          // Slide benefits section out when leaving from top
+          gsap.to(benefitsSectionRef.current, {
+            translateX: "100vw",
+            duration: 1,
+            ease: "power2.in",
+          });
         },
       },
-      0.4
-    );
-
-    // Phase 3: Slide slider section out to the left (40% to 60% of scroll)
-    tl.to(
-      sliderSectionRef.current,
-      {
-        // translateX: "-100vw",
-        duration: 0.2,
-        ease: "power2.inOut",
-      },
-      0.4
-    );
-
-    // Phase 4: Keep the benefits section pinned in view (60% to 100% of scroll)
-    tl.to(
-      benefitsSectionRef.current,
-      {
-        // translateX: "-100vw",
-        duration: 0.4,
-        ease: "power2.inOut",
-      },
-      0
-    );
+    });
 
     return () => {
       // Clean up this specific ScrollTrigger
       ScrollTrigger.getAll().forEach((trigger) => {
         if (trigger.vars.trigger === sectionRef.current) {
           trigger.kill();
+          tl.kill();
         }
       });
     };
