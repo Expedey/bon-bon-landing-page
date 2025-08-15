@@ -39,9 +39,7 @@ const Hero = (): JSX.Element => {
 
           <div className="flex flex-col items-center max-w-[750px] w-full mx-auto relative z-[1]">
             <h1 className="w-fit text-[42px] leading-tight text-white lg:text-[56px] xl:text-[74px] 2xl:text-[110px] 2xl:leading-[132px] text-center">
-              Start Living
-              <br />
-              Stop Planning
+              The Fun Starts <br /> Here
             </h1>
 
             <p className="w-full text-center text-base lg:text-[22px] xl:text-[26px] xl:leading-[40px] text-white my-[30px] max-w-[672px] mx-auto">

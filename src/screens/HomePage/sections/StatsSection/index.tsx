@@ -6,12 +6,12 @@ const StatsSection = (): JSX.Element => {
   // Data for stats cards to enable mapping
   const statsCards = [
     {
-      value: "16",
+      value: "30+",
       description: (
         <>
-          Years of
+          Curated experiences in the
           <br />
-          agency experience
+          pipeline
         </>
       ),
       shadow: "shadow-[0px_0px_100px_#76d9891a]",
@@ -20,24 +20,24 @@ const StatsSection = (): JSX.Element => {
       ),
     },
     {
-      value: "4.7",
+      value: "+25",
       description: (
         <>
-          Our clients happily rate us a
+          Early venues queued for
           <br />
-          4.7 out of 5
+          partnership
         </>
       ),
       shadow: "shadow-[0px_0px_100px_#6a4afd1a]",
       icon: <SemiCircleIcon className="w-[156px] h-[156px]" />,
     },
     {
-      value: "150+",
+      value: "3",
       description: (
         <>
-          Happy clients
+          Cities planned
           <br />
-          successfully served
+          for expansion after launch
         </>
       ),
       shadow: "shadow-[0px_0px_100px_#eb612b1a]",
@@ -46,12 +46,12 @@ const StatsSection = (): JSX.Element => {
       ),
     },
     {
-      value: "81%",
+      value: "1000+",
       description: (
         <>
-          Most clients start another
+          spots to claim before
           <br />
-          project with us
+          launch
         </>
       ),
       shadow: "shadow-[0px_0px_100px_#ee86e71a]",
@@ -66,11 +66,12 @@ const StatsSection = (): JSX.Element => {
       <div className="w-full px-4 relative mx-auto border border-[#ffffff1a] rounded-[50px] bg-[linear-gradient(0deg,rgba(255,255,255,0.02)_0%,rgba(255,255,255,0.02)_100%)]">
         <div className="max-w-[1440px] mx-auto py-5 lg:py-[120px]">
           <div className="flex flex-col w-full lg:max-w-[800px] xl:max-w-[1024px] 2xl:max-w-[1320px] items-center gap-[24px] mx-auto">
-            <h2 className="w-full text-center">Tried, tested, trusted</h2>
+            <h2 className="w-full text-center">
+              Tried, Tested, Trusted — Soon by You
+            </h2>
             <p className="w-full text-[#b0b0b0] text-center ">
-              With almost 2 decades of experience, we know all about the
-              challenges tech companies face. But most importantly we know
-              exactly how to overcome them. And our track record shows.
+              BonBon is about to change how you plan unforgettable outings.
+              Here’s what we’ve built before you even join:
             </p>
           </div>
 

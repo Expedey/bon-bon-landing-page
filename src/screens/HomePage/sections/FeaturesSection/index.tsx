@@ -8,6 +8,14 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { div } from "motion/react-client";
 import { cn } from "@/lib/utils";
+import {
+  Calendar1Icon,
+  Search,
+  SearchCheck,
+  SearchIcon,
+  SparkleIcon,
+  Users2Icon,
+} from "lucide-react";
 
 type TWaveText = {
   text: string;
@@ -103,15 +111,15 @@ const SliderSection = () => {
   const [goToSlide, setGoToSlide] = useState<number | null>(null);
 
   const painPoints = [
-    { id: 1, regular: "Outdated ", bold: "look & feel" },
-    { id: 2, regular: "User ", bold: "drop-off" },
-    { id: 3, regular: "Competitors ", bold: "staying ahead" },
-    { id: 4, regular: "Slow ", bold: "feature releases" },
-    { id: 5, regular: "Generic ", bold: "brand identity" },
-    { id: 6, regular: "", bold: "Technical", regular2: " debt" },
-    { id: 7, regular: "Lack of ", bold: "expertise" },
-    { id: 8, regular: "Missed ", bold: "deadlines" },
-    { id: 9, regular: "Low ", bold: "velocity" },
+    { id: 4, regular: "Hard-to-please groups" },
+    { id: 1, regular: "Juggling multiple sites" },
+    { id: 2, regular: "Last-minute cancellations" },
+    { id: 3, regular: "Overpriced and dull experience" },
+    { id: 5, regular: "Endless group chats " },
+    { id: 6, regular: "Time wasted on planning " },
+    { id: 8, regular: "Low velocity" },
+    { id: 9, regular: "Outdated look & feel" },
+    { id: 7, regular: "“Where to go” debates" },
   ];
 
   // Convert painPoints to slides format
@@ -218,10 +226,6 @@ const SliderSection = () => {
                     style={getItemStyle(presentableIndex)}
                   >
                     <span className="">{slide.content.regular}</span>
-                    <span className="">{slide.content.bold}</span>
-                    {slide.content.regular2 && (
-                      <span className="">{slide.content.regular2}</span>
-                    )}
                   </div>
                 ))}
               </div>
@@ -252,6 +256,7 @@ const SliderSection = () => {
 type TBenefit = {
   id: number;
   title: string;
+  icon: React.ReactNode;
   description: string;
 };
 
@@ -270,16 +275,11 @@ const BenefitsSection = ({ benefits }: { benefits: TBenefit[] }) => {
               className="flex flex-col items-start gap-2.5 p-10 xl:p-[50px] bg-[#ffffff05] rounded-[40px] border border-solid border-[#ffffff33] backdrop-blur-sm"
             >
               <CardContent className="flex flex-col items-start p-0 w-full">
-                <div className="relative xl:w-[66px] xl:h-[66px] w-[50px] h-[50px] rounded-full overflow-hidden">
-                  <Image
-                    className="object-cover relative"
-                    alt="Email"
-                    src="/images/email.svg"
-                    fill
-                  />
+                <div className="flex items-center justify-center xl:w-[66px] xl:h-[66px] w-[50px] h-[50px] bg-[#74DB8A] rounded-full overflow-hidden">
+                  {benefit.icon}
                 </div>
                 <div className="flex flex-col gap-4 items-start mt-4 w-full xl:mt-5">
-                  <h3 className="font-medium text-white text-xl xl:text-[32px] mb-2 xl:mb-4">
+                  <h3 className="font-medium text-white text-xl xl:text-[32px]">
                     {benefit.title}
                   </h3>
                   <p className="font-normal text-white text-lg tracking-[0.72px]">
@@ -314,27 +314,27 @@ const FeaturesSection = ({
   const benefits = [
     {
       id: 1,
-      title: "Top-tier team of experts",
-      description:
-        "Even the best teams need help. Following industry standards and beyond, our team of experts knows exactly what tools, methods and stack works best in your situation.",
+      icon: <SparkleIcon stroke="#fff" size={34} />,
+      title: "Personalized curation",
+      description: "Experiences you won’t stumble on scrolling generic lists.",
     },
     {
       id: 2,
-      title: "Proven powerful process",
-      description:
-        "Stop hitting snooze on updating your product's look and feel, launching that gold-nugget feature, or shaking off technical debt. Our trusty process is set up to make power moves.",
+      icon: <Users2Icon stroke="#fff" size={34} />,
+      title: "Effortless group planning",
+      description: "Poll, decide, and book without endless back-and-forth.",
     },
     {
       id: 3,
-      title: "Clear-cut comms",
-      description:
-        "Slow and foggy communication weighs down on your ability to scale efficiently. Whether it's a Slack message, a video call, or an on-site session, we value clarity.",
+      icon: <Calendar1Icon stroke="#fff" size={34} />,
+      title: "All-in-one booking",
+      description: "One place for invites, bookings, and last-minute changes",
     },
     {
       id: 4,
-      title: "Sharing knowledge",
-      description:
-        "Building a high quality and scalable product takes ongoing effort. After helping you level up we enable your in-house teams to keep up the pace. We hand-off our work *and* expertise.",
+      icon: <SearchCheck stroke="#fff" size={34} />,
+      title: "Social discovery",
+      description: "Find your next outing through your circles and trends.",
     },
   ];
 
@@ -429,7 +429,7 @@ const FeaturesSection = ({
 
         {/* Benefits Section */}
         <div ref={benefitsSectionRef} className="relative w-full min-h-screen">
-          <div ref={helloRef}>
+          <div className="h-full" ref={helloRef}>
             <BenefitsSection benefits={benefits} />
           </div>
         </div>
