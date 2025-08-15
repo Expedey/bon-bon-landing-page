@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../../../../components/ui/button";
 import { Input } from "../../../../components/ui/input";
 import Link from "next/link";
@@ -10,6 +10,12 @@ import Tooltip from "@/components/ui/tooltip";
 
 const Footer = (): JSX.Element => {
   const pathname = usePathname();
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
   // Navigation links data
   const navLinks = [
     { name: "Home", href: "/#hero" },
@@ -34,6 +40,39 @@ const Footer = (): JSX.Element => {
     { src: "/images/x.svg", alt: "X" },
     { src: "/images/insta.svg", alt: "Instagram" },
   ];
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!email || isSubmitting) return;
+
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        setEmail("");
+        // Reset success message after 3 seconds
+        setTimeout(() => setSubmitStatus("idle"), 3000);
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error("Newsletter submission error:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section className="w-full px-2 pb-2 lg:px-[30px] lg:pb-[30px]">
@@ -88,17 +127,40 @@ const Footer = (): JSX.Element => {
               </p>
             </div>
 
-            <div className="flex max-lg:py-1.5 max-lg:pr-1.5 w-full items-center relative rounded-[50px] bg-[linear-gradient(0deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.1)_100%)]">
-              <Input
-                className="flex-1 h-auto max-lg:px-6 max-lg:py-2 lg:p-[26px] pr-4 border-none bg-transparent text-white text-sm lg:!text-lg leading-normal border border-[#ffffff26] focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-white"
-                placeholder="Enter Your Email"
-              />
-              <div className="h-[48px] lg:h-20 lg:py-2.5 lg:px-2.5 aspect-square">
-                <button className="p-0 aspect-square rounded-full w-full h-full shadow-[inset_-4px_-4px_4px_0px_#5134D2,inset_4px_4px_4px_0px_#623FFE] hover:shadow-[inset_-4px_-4px_4px_0px_#6043e0,inset_4px_4px_4px_0px_#7151ff] bg-[linear-gradient(180deg,_#6A4AFD_0%,_#3015A9_100%)] flex items-center justify-center">
-                  <SendButtonIcon />
-                </button>
+            <form onSubmit={handleNewsletterSubmit} className="w-full relative">
+              <div className="flex max-lg:py-1.5 max-lg:pr-1.5 w-full items-center relative rounded-[50px] bg-[linear-gradient(0deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.1)_100%)]">
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-1 h-auto max-lg:px-6 max-lg:py-2 lg:p-[26px] pr-4 border-none bg-transparent text-white text-sm lg:!text-lg leading-normal border border-[#ffffff26] focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-white"
+                  placeholder="Enter Your Email"
+                  required
+                  autoComplete="off"
+                  disabled={isSubmitting}
+                />
+                <div className="h-[48px] lg:h-20 lg:py-2.5 lg:px-2.5 aspect-square">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !email}
+                    className="p-0 aspect-square rounded-full w-full h-full shadow-[inset_-4px_-4px_4px_0px_#5134D2,inset_4px_4px_4px_0px_#623FFE] hover:shadow-[inset_-4px_-4px_4px_0px_#6043e0,inset_4px_4px_4px_0px_#7151ff] bg-[linear-gradient(180deg,_#6A4AFD_0%,_#3015A9_100%)] flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <SendButtonIcon />
+                  </button>
+                </div>
+                {/* Status Messages */}
+                {submitStatus === "success" && (
+                  <p className="mt-2 text-sm text-[#74DB8A] absolute -bottom-2 translate-y-full left-5">
+                    Successfully subscribed! 🎉
+                  </p>
+                )}
+                {submitStatus === "error" && (
+                  <p className="mt-2 text-sm text-red-400 absolute -bottom-2 translate-y-full left-5">
+                    Something went wrong. Please try again.
+                  </p>
+                )}
               </div>
-            </div>
+            </form>
           </div>
 
           {/* Responsive Social Media Icons */}
@@ -178,7 +240,7 @@ const Footer = (): JSX.Element => {
           </p>
 
           {/* Footer Links */}
-          <div className="hidden relative gap-10 items-center lg:inline-flex">
+          <div className="relative items-center hidden gap-10 lg:inline-flex">
             <div className="inline-flex items-center gap-5 xl:gap-[50px] relative flex-[0_0_auto]">
               {footerLinks.map((link, index) => (
                 <Link
