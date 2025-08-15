@@ -52,6 +52,7 @@ function Navbar({
       section: "About",
     },
   ];
+  const waitlistLink = process.env.NEXT_PUBLIC_WAITLIST_LINK || "#";
   return (
     <div
       className={cn(
@@ -86,15 +87,9 @@ function Navbar({
             </Link>
           ))}
         </div>
-        <Button className="!ml-10 hidden lg:block">Join Now</Button>
-        {/* <MenuItem setActive={setActive} active={active} item="Services">
-          <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/web-dev">Web Development</HoveredLink>
-            <HoveredLink href="/interface-design">Interface Design</HoveredLink>
-            <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
-            <HoveredLink href="/branding">Branding</HoveredLink>
-          </div>
-        </MenuItem> */}
+        <Link href={waitlistLink}>
+          <Button className="!ml-10 hidden lg:block">Join Now</Button>
+        </Link>
       </Menu>
     </div>
   );

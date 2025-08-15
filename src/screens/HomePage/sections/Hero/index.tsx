@@ -3,8 +3,10 @@ import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
 import Image from "next/image";
 import { CircleIcon, SemiCircleIcon } from "@/components/icons";
+import Link from "next/link";
 
 const Hero = (): JSX.Element => {
+  const waitlistLink = process.env.NEXT_PUBLIC_WAITLIST_LINK || "#";
   return (
     <section className="h-screen px-4 md:px-6 lg:px-8 xl:px-[30px] py-4 md:py-6 lg:py-8 xl:py-[30px]">
       <Card className="h-full flex items-center w-full rounded-[50px] border border-[#ffffff1a] bg-[linear-gradient(0deg,rgba(255,255,255,0.02)_0%,rgba(255,255,255,0.02)_100%)]">
@@ -46,8 +48,9 @@ const Hero = (): JSX.Element => {
               BonBon takes the hassle out of planning group experiences — from
               spontaneous outings to unforgettable get-togethers.
             </p>
-
-            <Button>Join the Waitlist</Button>
+            <Link href={waitlistLink}>
+              <Button>Join the Waitlist</Button>
+            </Link>
           </div>
         </CardContent>
       </Card>
