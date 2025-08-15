@@ -30,7 +30,12 @@ export async function POST(request: NextRequest) {
           name: 'email',
           value: email
         }
-      ]
+      ],
+      context: {
+        pageUri: request.headers.get('referer') || 'https://yourdomain.com',
+        pageName: 'BonBon Newsletter Signup - Footer',
+        ipAddress: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'
+      },
     };
 
     const response = await fetch(hubspotUrl, {
