@@ -101,7 +101,7 @@ const TextRevealSection = (): JSX.Element => {
         if (index === 0) return; // Skip first word as it's already filled
 
         // Calculate the start time based on when the previous word finishes
-        const startTime = (index - 1) * 0.6; // Each word takes 0.6s, so next starts when previous ends
+        const startTime = (index - 1) * 0.3; // Each word takes 0.6s, so next starts when previous ends
 
         // Fill the word progressively
         tl.to(
@@ -134,7 +134,7 @@ const TextRevealSection = (): JSX.Element => {
               }
               return 0;
             },
-            duration: 0.6,
+            duration: 0.3,
             ease: "linear",
           },
           startTime // Start cursor movement at the same time as word filling
@@ -142,7 +142,7 @@ const TextRevealSection = (): JSX.Element => {
       });
 
       // Calculate when the last word animation finishes
-      const lastWordFinishTime = (totalWords - 1) * 0.6;
+      const lastWordFinishTime = (totalWords - 1) * 0.3;
 
       // Final animation: rotate cursor to horizontal and position below text center
       tl.to(
@@ -163,7 +163,7 @@ const TextRevealSection = (): JSX.Element => {
             }
             return 0;
           },
-          duration: 0.8,
+          duration: 0.6,
           ease: "power2.out",
         },
         lastWordFinishTime // Start after the last word animation completes

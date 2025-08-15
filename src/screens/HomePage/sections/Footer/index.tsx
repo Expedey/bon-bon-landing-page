@@ -17,6 +17,8 @@ const Footer = (): JSX.Element => {
     { name: "Hello", href: "/hello" },
     { name: "Program", href: "/program" },
     { name: "Leaderboard", href: "/leaderboard" },
+    { name: "Terms & Condition", href: "/terms-and-conditions" },
+    { name: "Privacy Policy", href: "/privacy-policy" },
   ];
 
   // Footer links data
@@ -34,7 +36,7 @@ const Footer = (): JSX.Element => {
 
   return (
     <section className="w-full px-2 pb-2 lg:px-[30px] lg:pb-[30px]">
-      <div className="w-full p-6 lg:p-[30px] rounded-[40px] bg-[linear-gradient(180deg,rgba(106,74,253,1)_0%,rgba(48,21,169,1)_100%)] relative overflow-hidden">
+      <div className="w-full p-6 md:p-8 lg:px-10 lg:pt-[50px] xl:pt-[100px] xl:px-[50px] rounded-[40px] bg-[linear-gradient(180deg,rgba(106,74,253,1)_0%,rgba(48,21,169,1)_100%)] relative overflow-hidden">
         {/* Decoration svg */}
         <div className="absolute max-lg:top-1/2 max-lg:-translate-y-1/2 max-lg:right-[-25px] 2xl:top-[96px] right-0 rotate-180 2xl:translate-x-[85px]">
           <SemiCircleIcon
@@ -58,7 +60,7 @@ const Footer = (): JSX.Element => {
                   <Link
                     href={link.href}
                     key={`nav-link-${index}`}
-                    className={`px-2.5 py-1 lg:px-5 lg:py-3.5 relative lg:text-lg text-white rounded-[60px] border w-fit ${
+                    className={`px-2.5 py-1 lg:px-5 lg:py-3.5 relative lg:text-lg text-white rounded-[60px] border w-fit lg:[&:nth-last-child(-n+2)]:hidden ${
                       isActive
                         ? "bg-[#ffffff0d] rounded-[60px] border border-[#ffffff26] lg:underline lg:underline-offset-4"
                         : "border-transparent bg-transparent"
@@ -132,7 +134,7 @@ const Footer = (): JSX.Element => {
           </div>
 
           {/* Copyright Text */}
-          <p className="text-white text-sm xl:text-lg text-center leading-[normal] max-lg:mx-auto ">
+          <p className="text-white text-xs xl:text-lg text-center leading-[normal] max-lg:mx-auto ">
             Copyright | 2025 BONBON. All rights reserved.
           </p>
 

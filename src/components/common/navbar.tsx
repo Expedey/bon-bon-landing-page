@@ -55,7 +55,7 @@ function Navbar({
   return (
     <div
       className={cn(
-        "fixed inset-x-0 bottom-5 z-50 mx-auto max-w-full md:bottom-10 w-fit transition-opacity duration-300",
+        "fixed inset-x-0 bottom-5 z-50 mx-auto max-w-full md:bottom-10 w-fit transition-opacity duration-300 max-lg:hidden",
         !isVisible && "opacity-0 pointer-events-none",
         className
       )}
