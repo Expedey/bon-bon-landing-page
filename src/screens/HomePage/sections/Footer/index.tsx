@@ -6,17 +6,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SemiCircleIcon, SendButtonIcon } from "@/components/icons";
 import Image from "next/image";
+import Tooltip from "@/components/ui/tooltip";
 
 const Footer = (): JSX.Element => {
   const pathname = usePathname();
   // Navigation links data
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Works", href: "/works" },
-    { name: "Goodbye", href: "/goodbye" },
-    { name: "Hello", href: "/hello" },
-    { name: "Program", href: "/program" },
-    { name: "Leaderboard", href: "/leaderboard" },
+    { name: "Home", href: "/#hero" },
+    { name: "Works", href: "/#works" },
+    { name: "Goodbye", href: "/#goodbye" },
+    { name: "Hello", href: "/#hello" },
+    { name: "Program", href: "/#program" },
+    { name: "Leaderboard", href: "/#leaderboard" },
     { name: "Terms & Condition", href: "/terms-and-conditions" },
     { name: "Privacy Policy", href: "/privacy-policy" },
   ];
@@ -28,10 +29,10 @@ const Footer = (): JSX.Element => {
   ];
 
   // Social media icons data
-  const socialIcons = [
-    { src: "/images/wa.svg", alt: "Whatsapp", link: "https://google.com" },
-    { src: "/images/x.svg", alt: "X", link: "https://google.com" },
-    { src: "/images/insta.svg", alt: "Instagram", link: "https://google.com" },
+  const socialIcons: { src: string; alt: string; link?: string }[] = [
+    { src: "/images/wa.svg", alt: "Whatsapp" },
+    { src: "/images/x.svg", alt: "X" },
+    { src: "/images/insta.svg", alt: "Instagram" },
   ];
 
   return (
@@ -102,17 +103,36 @@ const Footer = (): JSX.Element => {
 
           {/* Responsive Social Media Icons */}
           <div className="flex gap-4 items-center lg:hidden">
-            {socialIcons.map((icon, index) => (
-              <Link href={icon.link} key={`social-icon-${index}`}>
-                <Image
-                  className="relative"
-                  alt={icon.alt}
-                  src={icon.src}
-                  width={36}
-                  height={36}
-                />
-              </Link>
-            ))}
+            {socialIcons.map((icon, index) =>
+              icon?.link ? (
+                <Link href={icon?.link} key={`social-icon-${index}`}>
+                  <Image
+                    className="relative"
+                    alt={icon.alt}
+                    src={icon.src}
+                    width={36}
+                    height={36}
+                  />
+                </Link>
+              ) : (
+                <Tooltip
+                  key={`social-icon-${index}`}
+                  content={
+                    <p className="text-sm">
+                      Coming soon - we're still curating the vibes.
+                    </p>
+                  }
+                >
+                  <Image
+                    className="relative"
+                    alt={icon.alt}
+                    src={icon.src}
+                    width={36}
+                    height={36}
+                  />
+                </Tooltip>
+              )
+            )}
           </div>
         </div>
 
@@ -120,17 +140,36 @@ const Footer = (): JSX.Element => {
         <div className="flex mt-[30px] lg:mt-[60px] items-center w-full justify-between px-4 py-5 lg:px-11 lg:py-[15px] rounded-[50px] border border-[#ffffff26] bg-[linear-gradient(0deg,rgba(51,51,51,1)_0%,rgba(51,51,51,1)_100%)]">
           {/* Social Media Icons */}
           <div className="max-w-[327px] w-full items-center gap-5 relative hidden lg:flex">
-            {socialIcons.map((icon, index) => (
-              <Link href={icon.link} key={`social-icon-${index}`}>
-                <Image
-                  className="relative"
-                  alt={icon.alt}
-                  src={icon.src}
-                  width={36}
-                  height={36}
-                />
-              </Link>
-            ))}
+            {socialIcons.map((icon, index) =>
+              icon?.link ? (
+                <Link href={icon?.link} key={`social-icon-${index}`}>
+                  <Image
+                    className="relative"
+                    alt={icon.alt}
+                    src={icon.src}
+                    width={36}
+                    height={36}
+                  />
+                </Link>
+              ) : (
+                <Tooltip
+                  key={`social-icon-${index}`}
+                  content={
+                    <p className="text-sm">
+                      Coming soon - we're still curating the vibes.
+                    </p>
+                  }
+                >
+                  <Image
+                    className="relative"
+                    alt={icon.alt}
+                    src={icon.src}
+                    width={36}
+                    height={36}
+                  />
+                </Tooltip>
+              )
+            )}
           </div>
 
           {/* Copyright Text */}
