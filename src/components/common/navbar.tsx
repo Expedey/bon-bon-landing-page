@@ -18,37 +18,37 @@ function Navbar({
   const links = [
     {
       label: "Home",
-      href: "/",
+      href: "#hero",
       section: "Home",
     },
     {
       label: "Works",
-      href: "/works",
+      href: "#works",
       section: "Works",
     },
     {
       label: "Goodbye",
-      href: "/goodbye",
+      href: "#goodbye",
       section: "Goodbye",
     },
     {
       label: "Hello",
-      href: "/hello",
+      href: "#goodbye",
       section: "Hello",
     },
     {
       label: "Program",
-      href: "/program",
+      href: "#program",
       section: "Program",
     },
     {
       label: "Leaderboard",
-      href: "/leaderboard",
+      href: "#leaderboard",
       section: "Leaderboard",
     },
     {
       label: "About",
-      href: "/about",
+      href: "#about",
       section: "About",
     },
   ];

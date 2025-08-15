@@ -110,6 +110,10 @@
     @apply border-border font-[family-name:var(--font-owners-trial)] tracking-[1px];
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;

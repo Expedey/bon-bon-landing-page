@@ -85,21 +85,21 @@ const HomePage = (): JSX.Element => {
     <main className="bg-[#1a1a1a] flex flex-col items-center w-full min-h-screen relative">
       <Navbar isVisible={isNavbarVisible} activeSection={activeSection} />
       <div className="bg-[#1a1a1a] w-full relative">
-        <div ref={heroRef}>
+        <div id="hero" ref={heroRef}>
           <Hero /> {/** Home */}
         </div>
-        <div ref={worksRef}>
+        <div id="works" ref={worksRef}>
           <HowItWorksSection /> {/** Works */}
         </div>
         <FeaturesSection goodbyeRef={goodbyeRef} helloRef={helloRef} />{" "}
         {/** Goodbye / Hello */}
-        <div ref={programRef}>
+        <div id="program" ref={programRef}>
           <ReferralSection /> {/** Program */}
         </div>
-        <div ref={leaderboardRef}>
+        <div id="leaderboard" ref={leaderboardRef}>
           <AppShowcaseSection /> {/** Leaderboard */}
         </div>
-        <div ref={aboutRef}>
+        <div id="about" ref={aboutRef}>
           <TextRevealSection /> {/** About */}
         </div>
         <StatsSection /> {/** Footer */}
