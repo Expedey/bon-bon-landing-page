@@ -82,7 +82,7 @@ const HomePage = (): JSX.Element => {
   }, []);
 
   return (
-    <div className="bg-[#1a1a1a] flex flex-col items-center w-full min-h-screen relative">
+    <main className="bg-[#1a1a1a] flex flex-col items-center w-full min-h-screen relative">
       <Navbar isVisible={isNavbarVisible} activeSection={activeSection} />
       <div className="bg-[#1a1a1a] w-full relative">
         <div ref={heroRef}>
@@ -107,7 +107,7 @@ const HomePage = (): JSX.Element => {
           <Footer />
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
