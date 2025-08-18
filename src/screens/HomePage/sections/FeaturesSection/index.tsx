@@ -81,9 +81,7 @@ const WaveText = ({ text, className }: TWaveText) => {
   }, []);
 
   return (
-    <div
-      className={cn("flex gap-5 justify-end items-center lg:flex-1", className)}
-    >
+    <div className={cn("flex gap-5 justify-end items-center", className)}>
       <div className="w-[60px] lg:w-[100px] h-[90px] overflow-y-visible overflow-x-hidden relative flex items-center justify-center">
         <div
           ref={leftWaveRef}
@@ -214,7 +212,7 @@ const SliderSection = () => {
         <div className="flex relative justify-center items-center px-6 mx-auto h-full">
           <div className="flex flex-col w-full lg:flex-row items-center justify-center gap-10 lg:gap-20 xl:gap-32 2xl:gap-[154px] relative h-full">
             {/* Left side - "Say bye bye to" */}
-            <WaveText text="Say bye bye to" />
+            <WaveText className="lg:flex-1" text="Say bye bye to" />
 
             {/* Right side - Vertical Carousel */}
             <div className="relative lg:flex-1 max-lg:min-h-[400px] max-lg:w-full max-lg:overflow-hidden">
@@ -363,7 +361,9 @@ const FeaturesSection = ({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top", // Start when section top reaches center of viewport
-        end: "bottom top", // End when section bottom reaches center of viewport
+        end: "+=150%", // End when section bottom reaches center of viewport
+        pin: true,
+        anticipatePin: 1,
         onEnter: () => {
           // Slide benefits section in when entering
           gsap.to(benefitsSectionRef.current, {
@@ -380,14 +380,14 @@ const FeaturesSection = ({
             ease: "power2.out",
           });
         },
-        onLeave: () => {
-          // Slide benefits section out when leaving the section
-          gsap.to(benefitsSectionRef.current, {
-            translateX: "100vw",
-            duration: 1,
-            ease: "power2.in",
-          });
-        },
+        // onLeave: () => {
+        //   // Slide benefits section out when leaving the section
+        //   gsap.to(benefitsSectionRef.current, {
+        //     translateX: "0vw",
+        //     duration: 1,
+        //     ease: "power2.in",
+        //   });
+        // },
         onLeaveBack: () => {
           // Slide benefits section out when leaving from top
           gsap.to(benefitsSectionRef.current, {
@@ -398,6 +398,19 @@ const FeaturesSection = ({
         },
       },
     });
+
+    // tl.to(
+    //   benefitsSectionRef.current,
+    //   {
+    //     translateX: "-100vw",
+    //     duration: 1,
+    //     ease: "power2.inOut",
+    //     onComplete: () => {
+    //       ScrollTrigger.refresh(); // recalculate heights
+    //     },
+    //   },
+    //   0.4
+    // );
 
     return () => {
       // Clean up this specific ScrollTrigger
