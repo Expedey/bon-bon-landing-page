@@ -16,7 +16,7 @@ import { gsap } from "gsap";
 
 type TCardWithButton = {
   title: string;
-  description?: string;
+  description?: string | React.ReactNode;
   buttonText: string;
   buttonLink: string;
 };
@@ -30,13 +30,13 @@ const CardWithButton = ({
   return (
     <div className="flex flex-col gap-6 text-white lg:gap-10">
       <div className="bg-[#1E1E1E] p-4 2xl:p-[50px] border border-[#FFFFFF1A] rounded-[20px] xl:rounded-[50px] shadow-[0px_0px_100px_0px_#76D9891A] lg:shadow-none">
-        <h3 className="text-base md:text-2xl font-medium xl:text-3xl 2xl:text-4xl">
+        <h3 className="text-base font-medium md:text-2xl xl:text-3xl 2xl:text-4xl">
           {title}
         </h3>
         {description && (
-          <p className="text-white text-base 2xl:text-[22px] mt-5 break-words whitespace-pre-line">
+          <div className="text-white text-base 2xl:text-[22px] mt-5 break-words whitespace-pre-line">
             {description}
-          </p>
+          </div>
         )}
       </div>
       <Link href={buttonLink} className="mr-auto lg:mr-0 lg:ml-auto w-fit">
@@ -91,24 +91,48 @@ const AppShowcaseSection = (): JSX.Element => {
 
   const cards = [
     {
-      title: "Specific thresholds unlock access to perks",
-      description: `
-        Example:
-        3 invites = early access
-        10 invites = invite only-experiences
-        Top 10% = special recognition or premium features
-      `,
-      buttonText: "Each referral",
+      title: "Live leaderboard",
+      description: (
+        <>
+          <p className="text-white">
+            Ranked in realtime by <i>successful referrals.</i>
+            <br />
+            <span className="text-sm">
+              #1 = most referrals, #2 = next most, etc.
+            </span>
+          </p>
+        </>
+      ),
+      buttonText: "Referral link",
       buttonLink: "/",
     },
     {
-      title: "Earn referral gives the user points or XP",
-      buttonText: "Each referral",
+      title: "Every referral moves you up",
+      description: (
+        <>
+          <p className="text-white">
+            Share your link. Each <i>successful referral</i> boosts your rank
+            toward the Top 30.
+          </p>
+        </>
+      ),
+      buttonText: "Invite friends",
       buttonLink: "/",
     },
     {
-      title:
-        "Users are incentivized by both milestone rewards and relative ranking",
+      title: "Top 30 win from the Reward Pool",
+      description: (
+        <ul className="space-y-2 list-none list-inside">
+          <li>
+            &#xFE0F; Waitlist leaderboard + referral link (everyone on signup)
+          </li>
+          <li>💸 €10 off your first BonBon booking</li>
+          <li>🎉 Priority early access before public launch</li>
+          <li>👯 “Bring a Friend” bonus (you +1 to a surprise experience)</li>
+          <li>🥂 Invite to BonBon’s private launch party</li>
+          <li>🎁 Free curated group experience (you + 3 friends)</li>
+        </ul>
+      ),
       buttonText: "Each referral",
       buttonLink: "/",
     },
@@ -294,7 +318,7 @@ const AppShowcaseSection = (): JSX.Element => {
           </div>
           <div
             ref={containerRef}
-            className="flex flex-[2] lg:flex-col lg:overflow-hidden max-lg:px-4 min-h-[350px] lg:min-h-[auto] lg:px-0 max-w-[588px] w-full mx-auto lg:mx-0 lg:mt-20 relative"
+            className="flex flex-[2] lg:flex-col lg:overflow-hidden max-lg:px-4 min-h-[400px] lg:min-h-[auto] lg:px-0 max-w-[588px] w-full mx-auto lg:mx-0 lg:mt-20 relative"
           >
             {cards.map((card, index) => (
               <div
