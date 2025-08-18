@@ -111,15 +111,15 @@ const SliderSection = () => {
   const [goToSlide, setGoToSlide] = useState<number | null>(null);
 
   const painPoints = [
-    { id: 4, regular: "Hard-to-please groups" },
     { id: 1, regular: "Juggling multiple sites" },
     { id: 2, regular: "Last-minute cancellations" },
     { id: 3, regular: "Overpriced and dull experience" },
+    { id: 4, regular: "Hard-to-please groups" },
     { id: 5, regular: "Endless group chats " },
     { id: 6, regular: "Time wasted on planning " },
-    { id: 8, regular: "Low velocity" },
-    { id: 9, regular: "Outdated look & feel" },
     { id: 7, regular: "“Where to go” debates" },
+    { id: 8, regular: "Lost social moments" },
+    { id: 9, regular: "Boring routines" },
   ];
 
   // Convert painPoints to slides format
