@@ -10,42 +10,38 @@ const TextRevealSection = (): JSX.Element => {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
+  const text =
+    "We help friends turn plans into reality, through effortless group booking";
+  const words = text.split(" ");
 
   useEffect(() => {
     if (!sectionRef.current || !textRef.current || !cursorRef.current) return;
 
-    // Get all text spans for typewriter effect
-    const textSpans = textRef.current.querySelectorAll("span");
+    // Get all word spans
+    const wordSpans = textRef.current.querySelectorAll("span");
     let allWords: HTMLElement[] = [];
-    let totalWords = 0;
 
-    // Process all text spans and collect words
-    textSpans.forEach((span) => {
-      const text = span.textContent || "";
-      const words = text.split(" ");
-
-      // Clear the span content
-      span.innerHTML = "";
-
-      // Add each word with transparent color initially
-      words.forEach((word, wordIndex) => {
-        const wordSpan = document.createElement("span");
-        wordSpan.textContent = word + (wordIndex < words.length - 1 ? " " : "");
-        // Set first word to be filled initially, rest transparent
-        if (wordIndex === 0) {
-          wordSpan.style.color = "#fff";
-          wordSpan.style.webkitTextStroke = "1px #fff";
-        } else {
-          wordSpan.style.color = "transparent";
-          wordSpan.style.webkitTextStroke = "1px #fff";
-        }
-        span.appendChild(wordSpan);
-        allWords.push(wordSpan);
-        totalWords++;
-      });
+    // Collect all word spans
+    wordSpans.forEach((span) => {
+      allWords.push(span);
     });
 
-    // Set initial cursor position to the end of the first word (which is already filled)
+    // Set initial state: first word filled, rest transparent
+    allWords.forEach((word, index) => {
+      if (index === 0) {
+        gsap.set(word, {
+          color: "#fff",
+          webkitTextStroke: "1px #fff",
+        });
+      } else {
+        gsap.set(word, {
+          color: "transparent",
+          webkitTextStroke: "1px #fff",
+        });
+      }
+    });
+
+    // Set initial cursor position to the end of the first word
     if (allWords.length > 0) {
       const firstWord = allWords[0];
       const firstWordRect = firstWord.getBoundingClientRect();
@@ -67,9 +63,15 @@ const TextRevealSection = (): JSX.Element => {
       // Reset all words to transparent except first
       allWords.forEach((word, index) => {
         if (index === 0) {
-          gsap.set(word, { color: "#fff" });
+          gsap.set(word, {
+            color: "#fff",
+            webkitTextStroke: "1px #fff",
+          });
         } else {
-          gsap.set(word, { color: "transparent" });
+          gsap.set(word, {
+            color: "transparent",
+            webkitTextStroke: "1px #fff",
+          });
         }
       });
 
@@ -101,7 +103,7 @@ const TextRevealSection = (): JSX.Element => {
         if (index === 0) return; // Skip first word as it's already filled
 
         // Calculate the start time based on when the previous word finishes
-        const startTime = (index - 1) * 0.3; // Each word takes 0.6s, so next starts when previous ends
+        const startTime = (index - 1) * 0.3; // Each word takes 0.3s, so next starts when previous ends
 
         // Fill the word progressively
         tl.to(
@@ -142,7 +144,7 @@ const TextRevealSection = (): JSX.Element => {
       });
 
       // Calculate when the last word animation finishes
-      const lastWordFinishTime = (totalWords - 1) * 0.3;
+      const lastWordFinishTime = (allWords.length - 1) * 0.3;
 
       // Final animation: rotate cursor to horizontal and position below text center
       tl.to(
@@ -227,13 +229,12 @@ const TextRevealSection = (): JSX.Element => {
             ref={textRef}
             className="text-4xl lg:text-6xl xl:text-[86px] font-medium text-center tracking-normal !leading-normal [font-family:'OwnersTRIAL-Medium',Helvetica]"
           >
-            <span>We</span>
-            <span>
-              {" "}
-              help ambitious tech scale-ups thrive, through design and&nbsp;
-              <br />
-              development{" "}
-            </span>
+            {words.map((word, index) => (
+              <span key={index}>
+                {word}
+                {index < words.length - 1 && " "}
+              </span>
+            ))}
           </h2>
 
           <div
