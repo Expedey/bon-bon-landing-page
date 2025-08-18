@@ -19,10 +19,10 @@ const HomePage = (): JSX.Element => {
 
   // Refs for each section
   const heroRef = useRef<HTMLDivElement>(null);
-  const worksRef = useRef<HTMLDivElement>(null);
+  const howRef = useRef<HTMLDivElement>(null);
   const goodbyeRef = useRef<HTMLDivElement>(null);
   const helloRef = useRef<HTMLDivElement>(null);
-  const programRef = useRef<HTMLDivElement>(null);
+  const referralRef = useRef<HTMLDivElement>(null);
   const leaderboardRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
 
@@ -49,10 +49,10 @@ const HomePage = (): JSX.Element => {
   useEffect(() => {
     const sections = [
       { ref: heroRef, name: "Home" },
-      { ref: worksRef, name: "Works" },
+      { ref: howRef, name: "How" },
       { ref: goodbyeRef, name: "Goodbye" },
       { ref: helloRef, name: "Hello" },
-      { ref: programRef, name: "Program" },
+      { ref: referralRef, name: "Referral" },
       { ref: leaderboardRef, name: "Leaderboard" },
       { ref: aboutRef, name: "About" },
     ];
@@ -88,13 +88,13 @@ const HomePage = (): JSX.Element => {
         <div id="hero" ref={heroRef}>
           <Hero /> {/** Home */}
         </div>
-        <div id="works" ref={worksRef}>
-          <HowItWorksSection /> {/** Works */}
+        <div id="how" ref={howRef}>
+          <HowItWorksSection /> {/** How */}
         </div>
-        <FeaturesSection goodbyeRef={goodbyeRef} helloRef={helloRef} />{" "}
         {/** Goodbye / Hello */}
-        <div id="program" ref={programRef}>
-          <ReferralSection /> {/** Program */}
+        <FeaturesSection goodbyeRef={goodbyeRef} helloRef={helloRef} />{" "}
+        <div id="referral" ref={referralRef}>
+          <ReferralSection /> {/** Referral */}
         </div>
         <div id="leaderboard" ref={leaderboardRef}>
           <AppShowcaseSection /> {/** Leaderboard */}

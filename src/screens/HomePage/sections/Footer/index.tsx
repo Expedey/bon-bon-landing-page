@@ -15,10 +15,8 @@ const Footer = (): JSX.Element => {
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
-  const isProduction = process.env.NODE_ENV === "production";
-  const baseUrl = isProduction
-    ? process.env.NEXT_PUBLIC_PRODUCTION_URL
-    : "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL;
+  // const baseUrl = "http://localhost:3000";
 
   // Navigation links data
   const navLinks = [
@@ -28,13 +26,13 @@ const Footer = (): JSX.Element => {
     { name: "Hello", href: "/#hello" },
     { name: "Program", href: "/#program" },
     { name: "Leaderboard", href: "/#leaderboard" },
-    { name: "Terms & Condition", href: "/terms-and-conditions" },
+    { name: "Terms & Conditions", href: "/terms-and-conditions" },
     { name: "Privacy Policy", href: "/privacy-policy" },
   ];
 
   // Footer links data
   const footerLinks = [
-    { name: "Terms & Condition", href: "/terms-and-conditions" },
+    { name: "Terms & Conditions", href: "/terms-and-conditions" },
     { name: "Privacy Policy", href: "/privacy-policy" },
   ];
 

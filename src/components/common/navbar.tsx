@@ -22,9 +22,9 @@ function Navbar({
       section: "Home",
     },
     {
-      label: "Works",
-      href: "#works",
-      section: "Works",
+      label: "How",
+      href: "#how",
+      section: "How",
     },
     {
       label: "Goodbye",
@@ -37,9 +37,9 @@ function Navbar({
       section: "Hello",
     },
     {
-      label: "Program",
-      href: "#program",
-      section: "Program",
+      label: "Referral",
+      href: "#referral",
+      section: "Referral",
     },
     {
       label: "Leaderboard",

@@ -22,21 +22,19 @@ const HowItWorksSection = (): JSX.Element => {
           </h2>
 
           <p className="mt-[30px] text-lg xl:text-[22px] 2xl:text-[26px] text-white tracking-[1.04px] leading-normal 2xl:leading-10">
-            BonBon makes planning simple, fast, and actually fun.
-            <br />
-            <br />
-            Watch the animation to see how it turns group chaos into a smooth,
-            shareable experience your whole crew will love.
+            BonBon makes planning simple, fast, and actually fun. Watch how it
+            turns group chaos into a smooth, shareable experience your whole
+            crew will love.
           </p>
         </div>
-        <div className="flex-1 flex items-center justify-center h-full relative">
+        <div className="flex relative flex-1 justify-center items-center h-full">
           <video
             src="/videos/how-it-works.mp4"
             autoPlay
             muted
             loop
             playsInline
-            className="w-full h-full object-cover rounded-lg"
+            className="object-cover w-full h-full rounded-lg"
           />
           <div
             onClick={() => setOpenVideoPopup(true)}
