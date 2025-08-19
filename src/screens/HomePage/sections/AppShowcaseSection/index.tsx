@@ -10,7 +10,6 @@ import {
   TableRow,
 } from "../../../../components/ui/table";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { SemiCircleIcon } from "@/components/icons";
 import { gsap } from "gsap";
 
@@ -34,14 +33,18 @@ const CardWithButton = ({
           {title}
         </h3>
         {description && (
-          <div className="text-white text-base 2xl:text-[22px] mt-5 break-words whitespace-pre-line">
+          <div className="mt-5 text-base text-white whitespace-pre-line break-words 2xl:text-lg">
             {description}
           </div>
         )}
       </div>
-      <Link href={buttonLink} className="mr-auto lg:mr-0 lg:ml-auto w-fit">
+      <a
+        target="_blank"
+        href={buttonLink}
+        className="mr-auto lg:mr-0 lg:ml-auto w-fit"
+      >
         <Button>{buttonText}</Button>
-      </Link>
+      </a>
     </div>
   );
 };
@@ -94,7 +97,7 @@ const AppShowcaseSection = (): JSX.Element => {
       title: "Live leaderboard",
       description: (
         <>
-          <p className="text-white">
+          <p className="text-base text-white 2xl:text-lg">
             Ranked in realtime by <i>successful referrals.</i>
             <br />
             <span className="text-sm">
@@ -103,21 +106,21 @@ const AppShowcaseSection = (): JSX.Element => {
           </p>
         </>
       ),
-      buttonText: "Referral link",
-      buttonLink: "/",
+      buttonText: "Dashboard",
+      buttonLink: "https://referral-system-demo.netlify.app/dashboard",
     },
     {
       title: "Every referral moves you up",
       description: (
         <>
-          <p className="text-white">
+          <p className="text-base text-white 2xl:text-lg">
             Share your link. Each <i>successful referral</i> boosts your rank
             toward the Top 30.
           </p>
         </>
       ),
-      buttonText: "Invite friends",
-      buttonLink: "/",
+      buttonText: "Share Now",
+      buttonLink: "https://referral-system-demo.netlify.app/signin",
     },
     {
       title: "Top 30 win from the Reward Pool",
@@ -133,8 +136,8 @@ const AppShowcaseSection = (): JSX.Element => {
           <li>🎁 Free curated group experience (you + 3 friends)</li>
         </ul>
       ),
-      buttonText: "Each referral",
-      buttonLink: "/",
+      buttonText: "Claim Now",
+      buttonLink: "https://referral-system-demo.netlify.app/signup",
     },
   ];
 
@@ -215,7 +218,7 @@ const AppShowcaseSection = (): JSX.Element => {
     };
 
     // Start the interval
-    const interval = setInterval(animateToNext, 3000);
+    const interval = setInterval(animateToNext, 5000);
 
     // Cleanup
     return () => {
@@ -235,7 +238,7 @@ const AppShowcaseSection = (): JSX.Element => {
         </div>
         {/* Browser-like header */}
         <div className="max-w-[1440px] w-full mx-auto flex flex-col gap-10 lg:flex-row justify-between lg:px-[100px]">
-          <div className="relative flex-[3] px-4 lg:px-0">
+          <div className="relative flex-[3] px-4 lg:px-0 lg:pb-10">
             <div className="relative bg-[#1C1E20] rounded-tl-[32px] rounded-tr-[32px]">
               {/* Window control buttons */}
               <div className="flex gap-12 items-center px-9 py-5">
@@ -318,7 +321,7 @@ const AppShowcaseSection = (): JSX.Element => {
           </div>
           <div
             ref={containerRef}
-            className="flex flex-[2] lg:flex-col lg:overflow-hidden max-lg:px-4 min-h-[400px] lg:min-h-[auto] lg:px-0 max-w-[588px] w-full mx-auto lg:mx-0 lg:mt-20 relative"
+            className="flex flex-[2] lg:flex-col lg:overflow-hidden max-lg:px-4 min-h-[400px] lg:min-h-[auto] lg:px-0 max-w-[588px] w-full mx-auto lg:mx-0 relative"
           >
             {cards.map((card, index) => (
               <div

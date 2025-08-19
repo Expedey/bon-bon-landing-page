@@ -21,7 +21,7 @@ const Footer = (): JSX.Element => {
   // Navigation links data
   const navLinks = [
     { name: "Home", href: "/#hero" },
-    { name: "Works", href: "/#works" },
+    { name: "How", href: "/#how" },
     { name: "Goodbye", href: "/#goodbye" },
     { name: "Hello", href: "/#hello" },
     { name: "Program", href: "/#program" },

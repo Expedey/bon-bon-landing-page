@@ -21,8 +21,8 @@ const ReferralSection = (): JSX.Element => {
       title: "Claim your personal Invite Iink",
       description:
         "Once you join the waitlist, you'll get a unique referral link made just for you. It's your golden ticket to skip the line  and bring your friends with you.",
-      buttonText: "Invite Now",
-      buttonLink: waitlistUrl,
+      buttonText: "Claim now",
+      buttonLink: "https://referral-system-demo.netlify.app/signup",
       shadow: "xl:shadow-[0px_0px_100px_#6a4afd1a]",
       imageSrc: "/frame-42-4.svg",
       index: "z-[1]",
@@ -34,7 +34,7 @@ const ReferralSection = (): JSX.Element => {
       description:
         "Send your link via WhatsApp, Instagram, Messenger, or even text. Every friend who signs up through you boosts your rank on the waitlist.",
       buttonText: "Share Now",
-      buttonLink: waitlistUrl,
+      buttonLink: "https://referral-system-demo.netlify.app/signin",
       index: "z-[2]",
       shadow: "xl:shadow-[0px_0px_100px_#76d9891a]",
       imageSrc: "/frame-42-3.svg",
@@ -45,8 +45,8 @@ const ReferralSection = (): JSX.Element => {
       title: "Climb the ranks & Unlock Rewards",
       description:
         "The more people you bring, the faster you rise. Earn early access, unlock exclusive perks, and become an Elite hangout curator in the BonBon community.",
-      buttonText: "Share Now",
-      buttonLink: waitlistUrl,
+      buttonText: "Rewards",
+      buttonLink: "/#leaderboard",
       index: "z-[3] xl:z-[1]",
       shadow: "xl:shadow-[0px_0px_100px_#eb612b1a]",
       imageSrc: "/frame-42-5.svg",
@@ -148,7 +148,7 @@ const ReferralSection = (): JSX.Element => {
                     {card.description}
                   </p>
                 </div>
-                <Link href={card.buttonLink || ""} target="_blank">
+                <Link href={card.buttonLink || ""}>
                   <Button>
                     <span className="w-fit text-white text-lg text-center leading-[normal]">
                       {card.buttonText}

@@ -13,16 +13,16 @@ const PrivacyPolicyPage = () => {
       <div className="px-2 lg:px-[30px] w-full">
         <div className="px-2 lg:px-[30px] w-full border border-[#ffffff1a] rounded-[50px] py-10 lg:py-[80px] mb-[30px]">
           <div className="w-full mx-auto px-4 max-w-[1440px]">
-            <h1 className="text-white text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+            <h1 className="text-3xl text-white lg:text-4xl xl:text-5xl 2xl:text-6xl">
               Privacy Policy
             </h1>
             <div className="mt-[30px]">
-              <div className="text-white space-y-6">
+              <div className="space-y-6 text-white">
                 <p className="text-base text-gray-300">Last updated: {date}</p>
 
                 <div className="space-y-4">
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       1. Information We Collect
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -35,7 +35,7 @@ const PrivacyPolicyPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       2. How We Use Your Information
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -47,7 +47,7 @@ const PrivacyPolicyPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       3. Information Sharing and Disclosure
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -60,7 +60,7 @@ const PrivacyPolicyPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       4. Data Security
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -72,7 +72,7 @@ const PrivacyPolicyPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       5. Cookies and Tracking Technologies
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -85,7 +85,7 @@ const PrivacyPolicyPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       6. Third-Party Services
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -98,7 +98,7 @@ const PrivacyPolicyPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       7. Children's Privacy
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -110,7 +110,7 @@ const PrivacyPolicyPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       8. Your Rights and Choices
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -122,7 +122,7 @@ const PrivacyPolicyPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       9. International Data Transfers
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -135,7 +135,7 @@ const PrivacyPolicyPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       10. Changes to This Policy
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -148,16 +148,12 @@ const PrivacyPolicyPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">11. Contact Us</h3>
+                    <h3 className="mb-2 text-xl font-medium">11. Contact Us</h3>
                     <p className="text-base leading-relaxed">
                       If you have any questions about this Privacy Policy or our
                       data practices, please contact us at:
                       <br />
-                      Email: privacy@bonbon.com
-                      <br />
-                      Address: 123 Innovation Street, Tech City, TC 12345
-                      <br />
-                      Phone: +1 (555) 123-4567
+                      Email: privacy@bonbon.world
                     </p>
                   </section>
                 </div>
