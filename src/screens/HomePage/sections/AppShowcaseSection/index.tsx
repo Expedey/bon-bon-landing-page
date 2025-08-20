@@ -28,7 +28,7 @@ const CardWithButton = ({
 }: TCardWithButton) => {
   return (
     <div className="flex flex-col gap-6 text-white lg:gap-10">
-      <div className="bg-[#1E1E1E] p-4 2xl:p-[50px] border border-[#FFFFFF1A] rounded-[20px] xl:rounded-[50px] shadow-[0px_0px_100px_0px_#76D9891A] lg:shadow-none">
+      <div className="bg-[#1E1E1E] p-4 lg:p-8 2xl:p-[50px] border border-[#FFFFFF1A] rounded-[20px] xl:rounded-[50px] shadow-[0px_0px_100px_0px_#76D9891A] lg:shadow-none">
         <h3 className="text-base font-medium md:text-2xl xl:text-3xl 2xl:text-4xl">
           {title}
         </h3>

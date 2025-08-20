@@ -353,6 +353,8 @@ const FeaturesSection = ({
       translateX: "100vw",
       top: 0,
       left: 0,
+      duration: 1,
+      ease: "power2.out",
       minHeight: "100vh",
     });
 
@@ -361,33 +363,22 @@ const FeaturesSection = ({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top", // Start when section top reaches center of viewport
-        end: "+=150%", // End when section bottom reaches center of viewport
+        end: "bottom 300px", // End when section bottom reaches center of viewport
         pin: true,
         anticipatePin: 1,
         onEnter: () => {
           // Slide benefits section in when entering
           gsap.to(benefitsSectionRef.current, {
+            scrollTrigger: {
+              trigger: benefitsSectionRef.current,
+              start: "300px top",
+              end: "bottom bottom",
+            },
             translateX: "-100vw",
             duration: 1,
             ease: "power2.out",
           });
         },
-        onEnterBack: () => {
-          // Slide benefits section in when entering from bottom
-          gsap.to(benefitsSectionRef.current, {
-            translateX: "-100vw",
-            duration: 1,
-            ease: "power2.out",
-          });
-        },
-        // onLeave: () => {
-        //   // Slide benefits section out when leaving the section
-        //   gsap.to(benefitsSectionRef.current, {
-        //     translateX: "0vw",
-        //     duration: 1,
-        //     ease: "power2.in",
-        //   });
-        // },
         onLeaveBack: () => {
           // Slide benefits section out when leaving from top
           gsap.to(benefitsSectionRef.current, {
@@ -398,19 +389,6 @@ const FeaturesSection = ({
         },
       },
     });
-
-    // tl.to(
-    //   benefitsSectionRef.current,
-    //   {
-    //     translateX: "-100vw",
-    //     duration: 1,
-    //     ease: "power2.inOut",
-    //     onComplete: () => {
-    //       ScrollTrigger.refresh(); // recalculate heights
-    //     },
-    //   },
-    //   0.4
-    // );
 
     return () => {
       // Clean up this specific ScrollTrigger
