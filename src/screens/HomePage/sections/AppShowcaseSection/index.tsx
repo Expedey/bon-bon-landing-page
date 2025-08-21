@@ -10,7 +10,6 @@ import {
   TableRow,
 } from "../../../../components/ui/table";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { SemiCircleIcon } from "@/components/icons";
 import { gsap } from "gsap";
 import { useLeaderboard } from "@/hooks/useLeaderboard";
@@ -18,7 +17,7 @@ import { LeaderboardService } from "@/services/leaderboardService";
 
 type TCardWithButton = {
   title: string;
-  description?: string;
+  description?: string | React.ReactNode;
   buttonText: string;
   buttonLink: string;
 };
@@ -36,14 +35,18 @@ const CardWithButton = ({
           {title}
         </h3>
         {description && (
-          <p className="text-white text-base 2xl:text-[22px] mt-5 break-words whitespace-pre-line">
+          <div className="mt-5 text-base text-white break-words whitespace-pre-line 2xl:text-lg">
             {description}
-          </p>
+          </div>
         )}
       </div>
-      <Link href={buttonLink} className="mr-auto lg:mr-0 lg:ml-auto w-fit">
+      <a
+        target="_blank"
+        href={buttonLink}
+        className="mr-auto lg:mr-0 lg:ml-auto w-fit"
+      >
         <Button>{buttonText}</Button>
-      </Link>
+      </a>
     </div>
   );
 };
@@ -172,26 +175,50 @@ const AppShowcaseSection = (): JSX.Element => {
 
   const cards = [
     {
-      title: "Specific thresholds unlock access to perks",
-      description: `
-        Example:
-        3 invites = early access
-        10 invites = invite only-experiences
-        Top 10% = special recognition or premium features
-      `,
-      buttonText: "Each referral",
-      buttonLink: "/",
+      title: "Live leaderboard",
+      description: (
+        <>
+          <p className="text-base text-white 2xl:text-lg">
+            Ranked in realtime by <i>successful referrals.</i>
+            <br />
+            <span className="text-sm">
+              #1 = most referrals, #2 = next most, etc.
+            </span>
+          </p>
+        </>
+      ),
+      buttonText: "Dashboard",
+      buttonLink: "https://referral-system-demo.netlify.app/dashboard",
     },
     {
-      title: "Earn referral gives the user points or XP",
-      buttonText: "Each referral",
-      buttonLink: "/",
+      title: "Every referral moves you up",
+      description: (
+        <>
+          <p className="text-base text-white 2xl:text-lg">
+            Share your link. Each <i>successful referral</i> boosts your rank
+            toward the Top 30.
+          </p>
+        </>
+      ),
+      buttonText: "Share Now",
+      buttonLink: "https://referral-system-demo.netlify.app/signin",
     },
     {
-      title:
-        "Users are incentivized by both milestone rewards and relative ranking",
-      buttonText: "Each referral",
-      buttonLink: "/",
+      title: "Top 30 win from the Reward Pool",
+      description: (
+        <ul className="space-y-2 list-none list-inside">
+          <li>
+            &#xFE0F; Waitlist leaderboard + referral link (everyone on signup)
+          </li>
+          <li>💸 €10 off your first BonBon booking</li>
+          <li>🎉 Priority early access before public launch</li>
+          <li>👯 “Bring a Friend” bonus (you +1 to a surprise experience)</li>
+          <li>🥂 Invite to BonBon’s private launch party</li>
+          <li>🎁 Free curated group experience (you + 3 friends)</li>
+        </ul>
+      ),
+      buttonText: "Claim Now",
+      buttonLink: "https://referral-system-demo.netlify.app/signup",
     },
   ];
 
@@ -272,7 +299,7 @@ const AppShowcaseSection = (): JSX.Element => {
     };
 
     // Start the interval
-    const interval = setInterval(animateToNext, 3000);
+    const interval = setInterval(animateToNext, 5000);
 
     // Cleanup
     return () => {
@@ -292,7 +319,7 @@ const AppShowcaseSection = (): JSX.Element => {
         </div>
         {/* Browser-like header */}
         <div className="max-w-[1440px] w-full mx-auto flex flex-col gap-10 lg:flex-row justify-between lg:px-[100px]">
-          <div className="relative flex-[3] px-4 lg:px-0">
+          <div className="relative flex-[3] px-4 lg:px-0 lg:pb-10">
             <div className="relative bg-[#1C1E20] rounded-tl-[32px] rounded-tr-[32px]">
               {/* Window control buttons */}
               <div className="flex items-center gap-12 py-5 px-9">
@@ -393,7 +420,7 @@ const AppShowcaseSection = (): JSX.Element => {
           </div>
           <div
             ref={containerRef}
-            className="flex flex-[2] lg:flex-col lg:overflow-hidden max-lg:px-4 min-h-[350px] lg:min-h-[auto] lg:px-0 max-w-[588px] w-full mx-auto lg:mx-0 lg:mt-20 relative"
+            className="flex flex-[2] lg:flex-col lg:overflow-hidden max-lg:px-4 min-h-[400px] lg:min-h-[auto] lg:px-0 max-w-[588px] w-full mx-auto lg:mx-0 relative"
           >
             {cards.map((card, index) => (
               <div

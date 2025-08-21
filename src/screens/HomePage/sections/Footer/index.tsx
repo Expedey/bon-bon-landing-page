@@ -15,22 +15,24 @@ const Footer = (): JSX.Element => {
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
+  const baseUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL;
+  // const baseUrl = "http://localhost:3000";
 
   // Navigation links data
   const navLinks = [
     { name: "Home", href: "/#hero" },
-    { name: "Works", href: "/#works" },
+    { name: "How", href: "/#how" },
     { name: "Goodbye", href: "/#goodbye" },
     { name: "Hello", href: "/#hello" },
     { name: "Program", href: "/#program" },
     { name: "Leaderboard", href: "/#leaderboard" },
-    { name: "Terms & Condition", href: "/terms-and-conditions" },
+    { name: "Terms & Conditions", href: "/terms-and-conditions" },
     { name: "Privacy Policy", href: "/privacy-policy" },
   ];
 
   // Footer links data
   const footerLinks = [
-    { name: "Terms & Condition", href: "/terms-and-conditions" },
+    { name: "Terms & Conditions", href: "/terms-and-conditions" },
     { name: "Privacy Policy", href: "/privacy-policy" },
   ];
 
@@ -50,7 +52,7 @@ const Footer = (): JSX.Element => {
     setSubmitStatus("idle");
 
     try {
-      const response = await fetch("/api/newsletter", {
+      const response = await fetch(`${baseUrl}/api/newsletter`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -127,7 +129,7 @@ const Footer = (): JSX.Element => {
               </p>
             </div>
 
-            <form onSubmit={handleNewsletterSubmit} className="w-full relative">
+            <form onSubmit={handleNewsletterSubmit} className="relative w-full">
               <div className="flex max-lg:py-1.5 max-lg:pr-1.5 w-full items-center relative rounded-[50px] bg-[linear-gradient(0deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.1)_100%)]">
                 <Input
                   type="email"
@@ -155,7 +157,7 @@ const Footer = (): JSX.Element => {
                   </p>
                 )}
                 {submitStatus === "error" && (
-                  <p className="mt-2 text-sm text-red-400 absolute -bottom-2 translate-y-full left-5">
+                  <p className="absolute -bottom-2 left-5 mt-2 text-sm text-red-400 translate-y-full">
                     Something went wrong. Please try again.
                   </p>
                 )}
@@ -240,7 +242,7 @@ const Footer = (): JSX.Element => {
           </p>
 
           {/* Footer Links */}
-          <div className="relative items-center hidden gap-10 lg:inline-flex">
+          <div className="hidden relative gap-10 items-center lg:inline-flex">
             <div className="inline-flex items-center gap-5 xl:gap-[50px] relative flex-[0_0_auto]">
               {footerLinks.map((link, index) => (
                 <Link

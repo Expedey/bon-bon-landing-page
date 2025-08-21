@@ -13,16 +13,16 @@ const TermsAndConditionsPage = () => {
       <div className="px-2 lg:px-[30px] w-full">
         <div className="px-2 lg:px-[30px] w-full border border-[#ffffff1a] rounded-[50px] py-10 lg:py-[80px] mb-[30px]">
           <div className="w-full mx-auto px-4 max-w-[1440px]">
-            <h1 className="text-white text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+            <h1 className="text-3xl text-white lg:text-4xl xl:text-5xl 2xl:text-6xl">
               Terms & Conditions
             </h1>
             <div className="mt-[30px]">
-              <div className="text-white space-y-6">
+              <div className="space-y-6 text-white">
                 <p className="text-base text-gray-300">Last updated: {date}</p>
 
                 <div className="space-y-4">
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       1. Acceptance of Terms
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -34,7 +34,7 @@ const TermsAndConditionsPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">2. Use License</h3>
+                    <h3 className="mb-2 text-xl font-medium">2. Use License</h3>
                     <p className="text-base leading-relaxed">
                       Permission is granted to temporarily download one copy of
                       the materials (information or software) on BonBon's
@@ -46,7 +46,7 @@ const TermsAndConditionsPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">3. Disclaimer</h3>
+                    <h3 className="mb-2 text-xl font-medium">3. Disclaimer</h3>
                     <p className="text-base leading-relaxed">
                       The materials on BonBon's website are provided on an 'as
                       is' basis. BonBon makes no warranties, expressed or
@@ -59,7 +59,7 @@ const TermsAndConditionsPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">4. Limitations</h3>
+                    <h3 className="mb-2 text-xl font-medium">4. Limitations</h3>
                     <p className="text-base leading-relaxed">
                       In no event shall BonBon or its suppliers be liable for
                       any damages (including, without limitation, damages for
@@ -72,7 +72,7 @@ const TermsAndConditionsPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       5. Accuracy of Materials
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -86,7 +86,7 @@ const TermsAndConditionsPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">6. Links</h3>
+                    <h3 className="mb-2 text-xl font-medium">6. Links</h3>
                     <p className="text-base leading-relaxed">
                       BonBon has not reviewed all of the sites linked to its
                       website and is not responsible for the contents of any
@@ -97,7 +97,7 @@ const TermsAndConditionsPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       7. Modifications
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -109,7 +109,7 @@ const TermsAndConditionsPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       8. Governing Law
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -121,7 +121,7 @@ const TermsAndConditionsPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       9. Privacy Policy
                     </h3>
                     <p className="text-base leading-relaxed">
@@ -133,16 +133,14 @@ const TermsAndConditionsPage = () => {
                   </section>
 
                   <section>
-                    <h3 className="text-xl font-medium mb-2">
+                    <h3 className="mb-2 text-xl font-medium">
                       10. Contact Information
                     </h3>
                     <p className="text-base leading-relaxed">
                       If you have any questions about these Terms and
                       Conditions, please contact us at:
                       <br />
-                      Email: legal@bonbon.com
-                      <br />
-                      Address: 123 Innovation Street, Tech City, TC 12345
+                      Email: legal@bonbon.world
                     </p>
                   </section>
                 </div>

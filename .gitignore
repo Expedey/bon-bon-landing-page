@@ -26,3 +26,5 @@ dist-ssr
 .bolt
 .next
 .env
+
+/out
