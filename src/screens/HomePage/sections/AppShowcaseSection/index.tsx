@@ -320,22 +320,36 @@ const AppShowcaseSection = (): JSX.Element => {
         {/* Browser-like header */}
         <div className="max-w-[1440px] w-full mx-auto flex flex-col gap-10 lg:flex-row justify-between lg:px-[100px]">
           <div className="relative flex-[3] px-4 lg:px-0 lg:pb-10">
-            <div className="relative bg-[#1C1E20] rounded-tl-[32px] rounded-tr-[32px]">
+            <div className="relative px-6 md:px-10 py-4 md:py-8 bg-[#1E1E1E] border border-[#FFFFFF1A] rounded-tl-[32px] rounded-tr-[32px]">
               {/* Window control buttons */}
-              <div className="flex items-center gap-12 py-5 px-9">
+              {/* <div className="flex items-center gap-12 py-5 px-9">
                 <div className="inline-flex h-[19px] items-center gap-[11px]">
                   <div className="relative w-[14px] h-[14px] bg-[#f45952] rounded-[6px]" />
                   <div className="relative w-[14px] h-[14px] bg-[#dfb94e] rounded-[6px]" />
                   <div className="relative w-[14px] h-[14px] bg-[#5ab748] rounded-[6px]" />
                 </div>
 
-                {/* Address bar */}
                 <div className=" max-w-[442px] w-full bg-[#26292C] rounded-[6px] py-[7px] px-[10px]">
                   <p className="text-white text-xs tracking-[0] leading-[normal]">
                     BONBON
                   </p>
                 </div>
-              </div>
+              </div> */}
+
+              {/* <div>
+                <h1>Live Leaderboard</h1>
+               <p>
+                  Ranked in realtime by successful referrals.
+                  <br />
+                  #1 = most referrals, #2 = next most, etc.
+                </p>
+              </div> */}
+          
+        <h3 className="text-base font-medium text-white md:text-2xl xl:text-3xl 2xl:text-4xl">
+        Top 5 Right Now
+        </h3>
+    
+      
             </div>
             {/* Table content */}
             <CardContent className="p-0">

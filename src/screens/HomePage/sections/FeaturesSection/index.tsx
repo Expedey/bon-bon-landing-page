@@ -111,7 +111,7 @@ const SliderSection = () => {
   const painPoints = [
     { id: 1, regular: "Juggling multiple sites" },
     { id: 2, regular: "Last-minute cancellations" },
-    { id: 3, regular: "Overpriced and dull experience" },
+    { id: 3, regular: "Overpriced and dull experiences" },
     { id: 4, regular: "Hard-to-please groups" },
     { id: 5, regular: "Endless group chats " },
     { id: 6, regular: "Time wasted on planning " },
@@ -194,7 +194,7 @@ const SliderSection = () => {
   return (
     <div className="relative w-screen min-h-screen flex items-stretch bg-[linear-gradient(180deg,rgba(15,12,41,1)_0%,rgba(21,16,67,1)_100%)]">
       {/* Top Shapes */}
-      <div className="overflow-hidden relative w-full">
+      <div className="relative w-full overflow-hidden">
         <div className="absolute hidden top-0 translate-y-[-20px] translate-x-[-35px] left-0 lg:block">
           <SemiCircleIcon fillColor="#EE86E7" />
         </div>
@@ -203,13 +203,13 @@ const SliderSection = () => {
         </div>
 
         {/* Bottom Shapes */}
-        <div className="hidden absolute right-0 bottom-0 rotate-180 translate-y-1/2 lg:block">
+        <div className="absolute bottom-0 right-0 hidden rotate-180 translate-y-1/2 lg:block">
           <SemiCircleIcon fillColor="#74DB8A" />
         </div>
         <div className="absolute bottom-5 right-0 rotate-180 translate-x-[35px] lg:hidden">
           <SemiCircleIcon className="w-[130px] h-[130px]" />
         </div>
-        <div className="flex relative justify-center items-center px-6 mx-auto h-full">
+        <div className="relative flex items-center justify-center h-full px-6 mx-auto">
           <div className="flex flex-col w-full lg:flex-row items-center justify-center gap-10 lg:gap-20 xl:gap-32 2xl:gap-[154px] relative h-full">
             {/* Left side - "Say bye bye to" */}
             <WaveText className="lg:flex-1" text="Say bye bye to" />
@@ -229,16 +229,16 @@ const SliderSection = () => {
               </div>
 
               {/* Navigation Buttons */}
-              {/* <div className="flex absolute bottom-4 left-1/2 z-10 gap-4 transform -translate-x-1/2">
+              {/* <div className="absolute z-10 flex gap-4 transform -translate-x-1/2 bottom-4 left-1/2">
                 <button
                   onClick={() => moveSlide(-1)}
-                  className="px-4 py-2 text-white bg-white bg-opacity-20 rounded-lg transition-all duration-200 hover:bg-opacity-30"
+                  className="px-4 py-2 text-white transition-all duration-200 bg-white rounded-lg bg-opacity-20 hover:bg-opacity-30"
                 >
                   ↑
                 </button>
                 <button
                   onClick={() => moveSlide(1)}
-                  className="px-4 py-2 text-white bg-white bg-opacity-20 rounded-lg transition-all duration-200 hover:bg-opacity-30"
+                  className="px-4 py-2 text-white transition-all duration-200 bg-white rounded-lg bg-opacity-20 hover:bg-opacity-30"
                 >
                   ↓
                 </button>
@@ -272,11 +272,11 @@ const BenefitsSection = ({ benefits }: { benefits: TBenefit[] }) => {
               key={benefit.id}
               className="flex flex-col items-start gap-2.5 p-10 xl:p-[50px] bg-[#ffffff05] rounded-[40px] border border-solid border-[#ffffff33] backdrop-blur-sm"
             >
-              <CardContent className="flex flex-col items-start p-0 w-full">
+              <CardContent className="flex flex-col items-start w-full p-0">
                 <div className="flex items-center justify-center xl:w-[66px] xl:h-[66px] w-[50px] h-[50px] bg-[#74DB8A] rounded-full overflow-hidden">
                   {benefit.icon}
                 </div>
-                <div className="flex flex-col gap-4 items-start mt-4 w-full xl:mt-5">
+                <div className="flex flex-col items-start w-full gap-4 mt-4 xl:mt-5">
                   <h3 className="font-medium text-white text-xl xl:text-[32px]">
                     {benefit.title}
                   </h3>
@@ -313,7 +313,7 @@ const FeaturesSection = ({
     {
       id: 1,
       icon: <SparkleIcon stroke="#fff" size={34} />,
-      title: "Personalized curation",
+      title: "Personalised curation",
       description: "Experiences you won’t stumble on scrolling generic lists.",
     },
     {
@@ -402,7 +402,7 @@ const FeaturesSection = ({
   }, []);
 
   return (
-    <div className="overflow-hidden w-full">
+    <div className="w-full overflow-hidden">
       <section
         ref={sectionRef}
         className="flex overflow-hidden relative w-full min-h-screen min-w-[200vw]"
